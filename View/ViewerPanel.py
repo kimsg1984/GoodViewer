@@ -324,9 +324,12 @@ class ViewerPanel(wx.ScrolledWindow):
 
 	def onDeleteImage(self):
 		result = self.ImageCtrl.deleteImage()
+		print(result)
 		if result is not None:
-			if result is True: self.loadImage()
-			else: self.blinkScreen()
+			if result is True: 
+				self.loadImage()
+			else: 
+				self.blinkScreen()
 
 	def onRestoreImage(self):
 		result = self.ImageCtrl.restoreImage()

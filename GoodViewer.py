@@ -109,7 +109,7 @@ if __name__ == "__main__":
 		filename=None
 	app = myApp()
 	# filename = '/home/sungyo/Unison/2016/신대원수업/1학기/공관복음/1.png'
-	# filename = '/home/sungyo/ImageofGod/작품겔러리/2K™/20130930_1380468745_KIM_1941_2.jpg'
+	filename = '/home/sungyo/ImageofGod/작품겔러리/2K™/20130930_1380468745_KIM_1941_2.jpg'
 	if filename:app.activeViewer(filename)
 	else: app.activeThumbnailCtrl()
 	app.MainLoop()

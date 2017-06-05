@@ -89,13 +89,12 @@ class ImageCtrl():
 			else : next_num = self.previousPicGettingNum(self.current_num)
 			next_pic_path = self.filePathFromPicNumber(next_num)
 			self.updateImages(next_pic_path)
-			return True
 		else:
 			if self.folder_flip:
 				self.nextFolder()
 			else:
 				self.setClassValuesDefauts()
-				return False
+		return True
 
 	def restoreImage(self):
 		if self.throwed_file:
