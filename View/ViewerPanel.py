@@ -8,6 +8,10 @@
 import wx
 import sys
 import random
+import subprocess
+import re
+import os
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -17,6 +21,7 @@ sys.path.append(pymodule_path)
 # sys.path.append('../')
 import IO
 Config = IO.Shelve(filename='./Data/gooviewer_config.dat')
+File = IO.File()
 Log	= IO.Log(log_name='ViewerPanel', filelogging=False)
 # Logging    = Log.Logger()
 
@@ -46,6 +51,7 @@ class ViewerPanel(wx.ScrolledWindow):
 		self.__setPreViewingControlEvent()
 		self.__setSlideTimerEvent()
 		self.__loadConfig()
+		self.__setRightCickPopup()
 		self.binding()
 		self.SetFocus()
 
@@ -68,6 +74,7 @@ class ViewerPanel(wx.ScrolledWindow):
 			(self, wx.EVT_SIZE, self.onResize),
 			(self, wx.EVT_LEFT_DOWN, self.onPreviousPicture),
 			(self.canvus, wx.EVT_LEFT_DOWN, self.onLeftDown),
+			(self.canvus, wx.EVT_RIGHT_DOWN, self.onRightDown),
 			(self.canvus, wx.EVT_LEFT_UP, self.onLeftUp),
 			(self.canvus, wx.EVT_MOTION, self.onMotion)
 			]
@@ -98,6 +105,18 @@ class ViewerPanel(wx.ScrolledWindow):
 		self.slideTimer.Bind(wx.EVT_TIMER, self.nextSlide)
 		if not Config.hasKey('slide_time_min'): Config.save('slide_time_min', 10)
 		if not Config.hasKey('slide_time_max'): Config.save('slide_time_max', 10)
+
+	def __setRightCickPopup(self):
+		# RightCickPopup 
+		menu_titles = [ 
+			"OpenFolder",
+			"OpenWebpage",
+			]
+
+		self.menu_title_by_id = {}
+
+		for title in menu_titles:
+		    self.menu_title_by_id[ wx.NewId() ] = title
 
 	def _state_fullScreen(self, state):
 		self._full_screen_state = state
@@ -256,9 +275,22 @@ class ViewerPanel(wx.ScrolledWindow):
 			mouse_pos = event.GetPosition()
 			self._drag_on = (mouse_pos[0] + scroll_pos[0] ,mouse_pos[1] + scroll_pos[1])
 		else:self.onNextPicture()
+	
+	def onRightDown(self, event): 
+		# record what was clicked
+		# self.list_item_clicked = right_click_context = event.GetText()
 
-	def onLeftUp(self, event):
-		self._drag_on = False
+		### 2. Launcher creates wxMenu. ###
+		menu = wx.Menu()
+		for (id,title) in self.menu_title_by_id.items():
+			### 3. Launcher packs menu with Append. ###
+			menu.Append( id, title )
+			### 4. Launcher registers menu handlers with EVT_MENU, on the menu. ###
+			wx.EVT_MENU( menu, id, self.onRightClickMenuSelection )
+
+		### 5. Launcher displays menu with call to PopupMenu, invoked on the source component, passing event's GetPoint. ###
+		self.PopupMenu( menu, event.GetPosition() )
+		menu.Destroy() # destroy to avoid mem leak
 
 	def onMotion(self, event):
 		if self._drag_on is False: return
@@ -268,11 +300,17 @@ class ViewerPanel(wx.ScrolledWindow):
 
 	## Commend Function #########
 
+	def onLeftUp(self, event):
+		self._drag_on = False
+
 	def onNextPicture(self, event = None):
 		if self.ImageCtrl.nextPicture(): self.loadImage()
 
 	def onPreviousPicture(self, event = None):
 		if self.ImageCtrl.previousPicture(): self.loadImage()
+
+	def onFolderFlip(self, folder_flip, event = None):
+		self.ImageCtrl.folder_flip = folder_flip
 
 	def onUpdateImages(self, file_path):
 		result = self.ImageCtrl.updateImages(file_path)
@@ -319,3 +357,27 @@ class ViewerPanel(wx.ScrolledWindow):
 	def onConfiguration(self):
 		self.Configure = View.Configure.Configure(None, -1, 'Configuration')
 		self.Configure.Show(True)
+
+	## PopUp Menu Mathods #############
+	def onRightClickMenuSelection(self, check):
+		operation = self.menu_title_by_id[ check.GetId() ]
+		if operation == 'OpenFolder': self.onOpenFolder()
+		if operation == 'OpenWebpage': self.onOpenWebpage()
+
+	def onOpenFolder(self):
+		subprocess.check_call(['nautilus', self.ImageCtrl.pic_dir])
+
+	def onOpenWebpage(self):
+		pic_dir = self.ImageCtrl.pic_dir
+		current_filename = self.ImageCtrl.current_filename
+		
+		# 20130930_1380468745_KIM_1941_2.jpg
+		date_find = re.findall(r'^[0-9]{8}_', current_filename)
+		if date_find:	
+			print(date_find)	
+			for l in os.listdir(pic_dir):
+				# print(l)
+				find_text = re.findall(r'^%s.+\.txt' %(date_find[0]) ,l)
+				if len(find_text) > 0:
+					address = (File.read(os.path.join(pic_dir, find_text[0])).split('\n'))[0] 
+					subprocess.check_call(['chromium-browser', address])

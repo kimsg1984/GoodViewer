@@ -1,0 +1,1253 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"folder",
+				"folder_flip"
+			],
+			[
+				"whi",
+				"which_way_to_go	statement"
+			],
+			[
+				"next",
+				"nextFolder	function"
+			],
+			[
+				"fo",
+				"folder_flip	statement"
+			],
+			[
+				"is",
+				"isdir	function"
+			],
+			[
+				"li",
+				"listdir	function"
+			],
+			[
+				"Im",
+				"ImageCtrl	statement"
+			],
+			[
+				"save",
+				"save_folder_jackpum	statement"
+			],
+			[
+				"save_fo",
+				"save_folder_jackpum	statement"
+			],
+			[
+				"Main",
+				"MainClass"
+			],
+			[
+				"ch",
+				"chapter_and_verse	statement"
+			],
+			[
+				"cont",
+				"content_per_line"
+			],
+			[
+				"debug",
+				"debug_mode	statement"
+			],
+			[
+				"file",
+				"file_name	param"
+			],
+			[
+				"anoth",
+				"another_file_name	statement"
+			],
+			[
+				"fil",
+				"filename	statement"
+			],
+			[
+				"pa",
+				"path	module"
+			],
+			[
+				"com",
+				"comment	param"
+			],
+			[
+				"d",
+				"download_file	function"
+			],
+			[
+				"t",
+				"telepot	module"
+			],
+			[
+				"__",
+				"__file__	instance"
+			],
+			[
+				"list",
+				"list_name	statement"
+			],
+			[
+				"con",
+				"configparser	module"
+			],
+			[
+				"re",
+				"recipe_file	param"
+			],
+			[
+				"get",
+				"getcwd	function"
+			],
+			[
+				"cmd",
+				"cmd_line"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"no",
+				"nodeManager	class"
+			],
+			[
+				"ex",
+				"exclude	statement"
+			],
+			[
+				"cu",
+				"current_dir	statement"
+			],
+			[
+				"bin",
+				"bin_path	statement"
+			],
+			[
+				"dir_b",
+				"dir_binarybox	statement"
+			],
+			[
+				"i",
+				"islink	function"
+			],
+			[
+				"bi",
+				"binaries	statement"
+			],
+			[
+				"dir",
+				"dir_bin	statement"
+			],
+			[
+				"gen",
+				"generate_bin_others	function"
+			],
+			[
+				"genera",
+				"generate_bin_others	function"
+			],
+			[
+				"gene",
+				"generate_binary	function"
+			],
+			[
+				"path",
+				"pathjoin"
+			],
+			[
+				"acce",
+				"access_key"
+			],
+			[
+				"def",
+				"def	Function"
+			],
+			[
+				"ip",
+				"ip_address	statement"
+			],
+			[
+				"in",
+				"insert	function"
+			],
+			[
+				"return_list_b",
+				"return_list_by_client_name	function"
+			],
+			[
+				"return_list_",
+				"return_list_by_mac	function"
+			],
+			[
+				"print_list_b",
+				"print_list_by_client_name	function"
+			],
+			[
+				"print_list_by",
+				"print_list_by_mac	function"
+			],
+			[
+				"dhcpd",
+				"dhcpd_conf"
+			],
+			[
+				"tab",
+				"tab_count_min	statement"
+			],
+			[
+				"retu",
+				"return_list	param"
+			],
+			[
+				"ser",
+				"server_names	statement"
+			],
+			[
+				"dhcp",
+				"dhcpd_conf"
+			],
+			[
+				"ret",
+				"return_list	param"
+			],
+			[
+				"print",
+				"print_list	function"
+			],
+			[
+				"dh",
+				"dhcp_servers	statement"
+			],
+			[
+				"server",
+				"server_names"
+			],
+			[
+				"ren",
+				"renew_dhcp_list	function"
+			],
+			[
+				"dhc",
+				"dhcp_ips	statement"
+			],
+			[
+				"DHCP",
+				"DHCP_Manager	class"
+			],
+			[
+				"return_list",
+				"return_list_by_ip"
+			],
+			[
+				"gr",
+				"group_dhcpd_conf	statement"
+			],
+			[
+				"lis",
+				"list_by_name	statement"
+			],
+			[
+				"DH",
+				"DHCP_Server	class"
+			],
+			[
+				"di",
+				"dictionary_to_add	param"
+			],
+			[
+				"oid",
+				"oid_dictionary"
+			],
+			[
+				"ot",
+				"optionparser	optionparser"
+			],
+			[
+				"log",
+				"log_parsing	function"
+			],
+			[
+				"start",
+				"start_time"
+			],
+			[
+				"cli",
+				"client_name	statement"
+			],
+			[
+				"date",
+				"datetime	class"
+			],
+			[
+				"le",
+				"lease_list	statement"
+			],
+			[
+				"_",
+				"_test	statement"
+			],
+			[
+				"off",
+				"offset_file"
+			],
+			[
+				"L",
+				"LogTail	class"
+			],
+			[
+				"c_",
+				"c_split	statement"
+			],
+			[
+				"cm",
+				"cmd_location	statement"
+			],
+			[
+				"curre",
+				"current_verb	statement"
+			],
+			[
+				"Ele",
+				"Element_bible"
+			],
+			[
+				"El",
+				"Element_book"
+			],
+			[
+				"E",
+				"Element	class"
+			],
+			[
+				"boo",
+				"book_abbri_eng	statement"
+			],
+			[
+				"book",
+				"book_abbri_ko	statement"
+			],
+			[
+				"bibl",
+				"bible_text_file"
+			],
+			[
+				"In",
+				"IndexError	class"
+			],
+			[
+				"w",
+				"write	function"
+			],
+			[
+				"ET",
+				"ElementTree"
+			],
+			[
+				"Elem",
+				"ElementTree"
+			],
+			[
+				"Et",
+				"ElementTree"
+			],
+			[
+				"pic",
+				"picture_w"
+			],
+			[
+				"win",
+				"window_h"
+			],
+			[
+				"S",
+				"SERVER_NAME"
+			],
+			[
+				"echo",
+				"echoHelp"
+			],
+			[
+				"res",
+				"result_by_location"
+			],
+			[
+				"Fil",
+				"FileManager"
+			],
+			[
+				"info",
+				"info_list"
+			],
+			[
+				"stor",
+				"store_code"
+			],
+			[
+				"to",
+				"totom_command_key"
+			],
+			[
+				"current_",
+				"current_window_id"
+			],
+			[
+				"tot",
+				"totem_window_title"
+			],
+			[
+				"gre",
+				"greek_text_and_parsing"
+			],
+			[
+				"or",
+				"order"
+			],
+			[
+				"ini",
+				"initiolization"
+			],
+			[
+				"b",
+				"book_short_code"
+			],
+			[
+				"bo",
+				"book_tag"
+			],
+			[
+				"pre",
+				"preffix"
+			],
+			[
+				"ta",
+				"take_snapshot"
+			],
+			[
+				"tak",
+				"takeAllSnapShot"
+			],
+			[
+				"jail",
+				"jail_delay"
+			],
+			[
+				"J",
+				"JAIL_TIME"
+			],
+			[
+				"event_",
+				"event_name"
+			],
+			[
+				"ev",
+				"event_time"
+			],
+			[
+				"text",
+				"text_file"
+			],
+			[
+				"time",
+				"time_end"
+			],
+			[
+				"last",
+				"last_verse"
+			],
+			[
+				"parse",
+				"parsed"
+			],
+			[
+				"par",
+				"parsing_code"
+			],
+			[
+				"las",
+				"last_verse"
+			],
+			[
+				"last_ver",
+				"last_verse"
+			],
+			[
+				"la",
+				"last_chapter"
+			],
+			[
+				"r",
+				"robinson"
+			],
+			[
+				"num",
+				"book_number"
+			],
+			[
+				"mor",
+				"morphgnt_rows"
+			],
+			[
+				"H",
+				"HttpResponse"
+			],
+			[
+				"django",
+				"django_bookmarks"
+			],
+			[
+				"pub",
+				"publisher"
+			],
+			[
+				"pu",
+				"publishing_year"
+			],
+			[
+				"do",
+				"domain"
+			],
+			[
+				"lo",
+				"logged_in"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "GoodViewer.py",
+			"settings":
+			{
+				"buffer_size": 3328,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\n# Author: SunGyo Kim\n# Email: Kimsg1984@gmail.com\n# irc.freenode #ubuntu-ko Sungyo\n\nimport wx\nimport sys\nimport random\nreload(sys)\nsys.setdefaultencoding('utf-8')\n\n## 커스텀 모듈 ##\npymodule_path='/home/sungyo/Unison/script/module/python'\nsys.path.append(pymodule_path)\n# sys.path.append('../')\nimport IO\nConfig = IO.Shelve(filename='./Data/gooviewer_config.dat')\nLog	= IO.Log(log_name='ViewerPanel', filelogging=False)\n# Logging    = Log.Logger()\n\nimport View.Configure\n\nimport Data.WildCard\nwildcard = Data.WildCard.getKeywords()\nwildcard_on_listdir = wildcard[1]\n\n# import self.ImageCtrl\n# ImageCtrl = self.ImageCtrl.ImageCtrl()\n\n# class ViewerPanel(wx.Panel):\nclass ViewerPanel(wx.ScrolledWindow):\n	def __init__(self, parent, imageCtrl):\n\n		wx.ScrolledWindow.__init__(self, parent)\n		self.ImageCtrl = imageCtrl\n		width, height = wx.DisplaySize()\n		print 'width, height: %s * %s' %(width, height)\n		# Log.Logger.info('width, height: %s * %s' %(width, height))\n		self.photo_max_size = height - 200\n		self.window_size = (height - 200, height - 200)\n		self.SetBackgroundColour('black')\n		self.__setLayout()\n		self.__setClassValues()\n		self.__setPreViewingControlEvent()\n		self.__setSlideTimerEvent()\n		self.__loadConfig()\n		self.binding()\n		self.SetFocus()\n\n	def __setLayout(self):\n		self.empty_img	= wx.EmptyImage(self.photo_max_size,self.photo_max_size)\n		self.canvus 	= wx.StaticBitmap(self, wx.ID_ANY, wx.BitmapFromImage(self.empty_img))\n		self.Refresh()\n\n	def __setClassValues(self):\n		self.current_img = None\n		self._full_screen_state = False\n		self._set_virtical_screen_rotate = False\n		self._rotate_clockwise = True\n		self._set_image_quelity_high = False\n		self._zooming = False\n		self._drag_on = False\n		self.setZoomDefault()\n\n		self.bind_list = [\n			(self, wx.EVT_SIZE, self.onResize),\n			(self, wx.EVT_LEFT_DOWN, self.onPreviousPicture),\n			(self.canvus, wx.EVT_LEFT_DOWN, self.onLeftDown),\n			(self.canvus, wx.EVT_LEFT_UP, self.onLeftUp),\n			(self.canvus, wx.EVT_MOTION, self.onMotion)\n			]\n\n	def __loadConfig(self):\n\n		rotate_key = Config.load('full_rotate')\n		if rotate_key == 'off' : pass\n\n		elif rotate_key == 'left'	:\n			self._set_virtical_screen_rotate = True\n			self._rotate_clockwise = False\n\n		elif rotate_key == 'right':\n			self._set_virtical_screen_rotate = True\n			self._rotate_clockwise = True\n\n		self._set_image_quelity_high = Config.load('sub_high_quelity')\n\n	def __setPreViewingControlEvent(self):\n		self.prepare_triger = wx.Timer()\n		self.prepare_triger.Bind(wx.EVT_BUTTON, self.ImageCtrl.onPrepare)\n		self.evt = wx.CommandEvent()\n		self.evt.SetEventType(wx.EVT_BUTTON.typeId)\n\n	def __setSlideTimerEvent(self):\n		self.slideTimer = wx.Timer(None)\n		self.slideTimer.Bind(wx.EVT_TIMER, self.nextSlide)\n		if not Config.hasKey('slide_time_min'): Config.save('slide_time_min', 10)\n		if not Config.hasKey('slide_time_max'): Config.save('slide_time_max', 10)\n\n	def _state_fullScreen(self, state):\n		self._full_screen_state = state\n\n	def _get_CurrentFileName(self):\n		return self.ImageCtrl._get_CurrentFileName()\n\n	def _get_CurrentDir(self):\n		return self.ImageCtrl._get_CurrentDir()\n\n	def _set_virticalScreenRotate(self, config):\n		if 	config == 'off':\n			self._set_virtical_screen_rotate = False\n\n		elif 	config == 'right':\n			self._set_virtical_screen_rotate = True\n			self._rotate_clockwise = True\n\n		elif 	config == 'left':\n			self._rotate_clockwise = False\n			self._set_virtical_screen_rotate = True\n\n	def _set_ImageQuelityHigh(self, value):\n		self._set_image_quelity_high=value\n\n	def binding(self, value = True):\n		for b in self.bind_list: b[0].Bind(b[1], b[2])\n\n	def setZoomDefault(self):\n		self._zooming = False\n		self.zoom_ratio = 1\n		self.zoom_power = 1.2\n		self.scroll_size = 0\n		self.scroll_ratio = [0.5, 0.5]\n\n		self.SetScrollbars(0,0,0,0)\n\n	## WORK FUNCTION ##\n\n	def blinkScreen(self):\n		self.canvus 	= wx.StaticBitmap(self, wx.ID_ANY, wx.BitmapFromImage(self.empty_img))\n		self.main_sizer.Add(self.canvus, 1, wx.GROW|wx.ALIGN_CENTER|wx.ALL, 5)\n		self.Refresh()\n\n	def reSize(self, size):\n		self.window_size = size\n		if not self._zooming :\n			try:\n				if self.current_img: self.imageOnPanel(self.current_img)\n			except AttributeError: pass\n		self.Refresh()\n\n	def loadImage(self):\n		self.setZoomDefault()\n		self.current_img = self.ImageCtrl.loadImage()\n		self.imageOnPanel(self.current_img)\n		wx.PostEvent(self.prepare_triger, self.evt)\n\n	def imageOnPanel(self, img):\n\n		## class instance ##\n		window_size = self.window_size\n\n		## Inter Function ####\n		def fullScreenRotate(img):\n			if self._full_screen_state:\n				if self._set_virtical_screen_rotate:\n					if img.GetWidth() < img.GetHeight() : # is the image wide or stand?\n						img = img.Rotate90(clockwise=self._rotate_clockwise) # lay on right\n			return img\n\n		###################\n\n		## full screen rotate ##\n		img = fullScreenRotate(img)\n\n		picture_w = img.GetWidth()\n		picture_h = img.GetHeight()\n		window_w, window_h = window_size[0], window_size[1]\n		if ((float(window_w) / picture_w ) * picture_h ) <= window_h :  # which is fitter? w? or h?\n			new_w = window_w\n			new_h = int((float(new_w) / picture_w ) * picture_h)\n		else:\n			new_h = window_h\n			new_w = int((float(new_h) / picture_h ) * picture_w)\n\n		######################\n		unit = 1\n		distence = 40\n		pos = (0 , 0)\n\n		if self._zooming:\n			# print  self.GetScaleY[0]\n			new_w, new_h = new_w*self.zoom_ratio, new_h*self.zoom_ratio\n			scroll_size = self.scroll_size\n			scroll_ratio = self.scroll_ratio\n\n			if 1 < self.zoom_ratio :\n				## get class values ##\n				view_start = self.GetViewStart()\n\n				if view_start[0] is not 0: scroll_ratio[0] = view_start[0] / float(scroll_size[0] - window_size[0])\n				if view_start[1] is not 0: scroll_ratio[1] = view_start[1] / float(scroll_size[1] - window_size[1])\n\n				scroll_size = ((new_w/unit) + (distence*2), (new_h/unit) + (distence*2))\n				pos = ((scroll_size[0] - window_size[0])*scroll_ratio[0], (scroll_size[1] - window_size[1])*scroll_ratio[1])\n\n			else:\n				scroll_size = (0, 0)\n\n			self.SetScrollbars(unit, unit, scroll_size[0], scroll_size[1])\n\n			## return class values ##\n			self.scroll_size = scroll_size\n\n		## Scale with Set Quelity ###\n		if self._set_image_quelity_high: img = img.Scale(new_w, new_h, wx.IMAGE_QUALITY_HIGH)\n		else: img = img.Scale(new_w, new_h)\n\n		if 1 < self.zoom_ratio:\n			control_position_w = distence\n			control_position_h = distence\n\n		else: # put center\n			control_position_w = int((window_w - new_w) / 2)\n			control_position_h = int((window_h - new_h) / 2)\n\n		self.canvus.SetBitmap(wx.BitmapFromImage(img))\n		self.canvus.SetPosition((control_position_w, control_position_h))\n		self.Scroll(pos[0], pos[1])\n		# self.refreshPanel()\n		filename = self.ImageCtrl._get_CurrentFileName()\n		if filename : self.Parent.SetTitle(filename)\n		self.Refresh()\n\n	def nextSlide(self, event):\n\n		time = random.randrange(Config.load('slide_time_min'), int(Config.load('slide_time_max')) + 1) # 랜덤 맥스는 '%d 미만'으로 받는다\n		print 'time: %s' %time\n\n		if self.slideTimer.IsRunning(): \n			if self.ImageCtrl.nextOrFirst() : self.onNextPicture()\n			else: self.onFirst_picture()\n			self.slideTimer.Stop()\n			self.slideTimer.Start(time*1000) # 100 is a second\n		else:\n			self.slideTimer.Start(time*1000)\n\n	def onResize(self, event):\n		size = self.Parent.GetSize()\n		self.reSize(size)\n\n	def onLeftDown(self, event):\n		if self._zooming:\n			scroll_pos = self.GetViewStart()\n			mouse_pos = event.GetPosition()\n			self._drag_on = (mouse_pos[0] + scroll_pos[0] ,mouse_pos[1] + scroll_pos[1])\n		else:self.onNextPicture()\n\n	def onLeftUp(self, event):\n		self._drag_on = False\n\n	def onMotion(self, event):\n		if self._drag_on is False: return\n		moving_pos = event.GetPosition()\n		x, y = self._drag_on[0] - moving_pos[0], self._drag_on[1] - moving_pos[1]\n		self.Scroll(x, y)\n\n	## Commend Function #########\n\n	def onNextPicture(self, event = None):\n		if self.ImageCtrl.nextPicture(): self.loadImage()\n\n	def onPreviousPicture(self, event = None):\n		if self.ImageCtrl.previousPicture(): self.loadImage()\n\n	def onFolderFlip(self, folder_flip, event = None):\n		self.ImageCtrl.folder_flip = folder_flip\n\n	def onUpdateImages(self, file_path):\n		result = self.ImageCtrl.updateImages(file_path)\n		if result : self.loadImage()\n\n	def onFirst_picture(self):\n		if self.ImageCtrl.firstPicture(): self.loadImage()\n\n	def onLast_picture(self):\n		if self.ImageCtrl.lastPicture(): self.loadImage()\n\n	def onDeleteImage(self):\n		result = self.ImageCtrl.deleteImage()\n		if result is not None:\n			if result is True: self.loadImage()\n			else: self.blinkScreen()\n\n	def onRestoreImage(self):\n		result = self.ImageCtrl.restoreImage()\n		if result is not None:\n			if result is True: self.loadImage()\n\n	def onZoomIn(self):\n		if self.current_img:\n			self._zooming = True\n			self.zoom_ratio = self.zoom_ratio*self.zoom_power\n			self.imageOnPanel(self.current_img)\n\n	def onZoomOut(self):\n		if self.current_img:\n			self._zooming = True\n			self.zoom_ratio = self.zoom_ratio/self.zoom_power\n			self.imageOnPanel(self.current_img)\n\n	def onZoomFit(self):\n		if self.current_img:\n			self.setZoomDefault()\n			self.imageOnPanel(self.current_img)\n\n	def onSlide(self, check):\n		if check:  self.nextSlide(wx.EVT_TIMER)  \n		else: self.slideTimer.Stop()\n\n	def onConfiguration(self):\n		self.Configure = View.Configure.Configure(None, -1, 'Configuration')\n		self.Configure.Show(True)",
+			"file": "View/ViewerPanel.py",
+			"file_size": 9415,
+			"file_write_time": 1496210338000000,
+			"settings":
+			{
+				"buffer_size": 9358,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "BO/thumbnailctrl.py",
+			"settings":
+			{
+				"buffer_size": 75021,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "imageCtrl.py",
+			"settings":
+			{
+				"buffer_size": 8872,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "MenuBar/ViewerMenuBar.py",
+			"settings":
+			{
+				"buffer_size": 9214,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"Snippet: ",
+				"Snippet: #--"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Remove Channel"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 428.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/sungyo/Unison/Application/GoodViewer/MenuBar/ViewerMenuBar.py",
+		"/home/sungyo/Unison/Application/GoodViewer/MenuBar/ThumbScrollMenuBar.py",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/jackpum_gel2.py",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/sub_gel2.py",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/list.txt",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/rename.sh",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/findAndExif.sh",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/exif2.sh",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/subject_gel.py",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/jackpum_gel.py",
+		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/작품겔러리/gel_list.txt",
+		"/opt/binarybox/module/python/IO.py",
+		"/home/sungyo/result.txt",
+		"/home/sungyo/script.py",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/importcustom.sublime-snippet",
+		"/opt/binarybox/module/python/OS.py",
+		"/opt/binarybox/applications/check-pocketfi/check-pocketfi.py",
+		"/run/user/1000/gvfs/sftp:host=192.168.0.215/opt/binarybox/crontab/boardparsing/board-noti-chongshin.py",
+		"/run/user/1000/gvfs/sftp:host=192.168.0.215/opt/binarybox/bin/bin_server/gitup",
+		"/home/sungyo/바탕화면/impress.js-master/index.html",
+		"/home/sungyo/바탕화면/impress.js-master/css/impress-demo.css",
+		"/home/sungyo/바탕화면/impress.js-master/index.html.old",
+		"/home/sungyo/바탕화면/성도의 인사(옵션).sh",
+		"/home/sungyo/바탕화면/impress.js-master/index2.html",
+		"/home/sungyo/바탕화면/impress.js-master/index3.html",
+		"/opt/binarybox/applications/telepy/teledemon",
+		"/home/sungyo/websites/revival/www.1907revival.com/bbs/list0b5b.html.tmp",
+		"/home/sungyo/18.Jb-01-2-1:21",
+		"/home/sungyo/Unison/script/python/UserScript/check-ir6000.py",
+		"/home/sungyo/바탕화면/60.1P-2-2-2:9.caf",
+		"/home/sungyo/바탕화면/22.SS-8-2-8:6.caf",
+		"/backup/sungyo/tomboy/Backup/9672250d-8c0b-4b39-97a5-bfa5d7e5298c.note",
+		"/opt/binarybox/bin/bin-default/binarybox-setup",
+		"/opt/binarybox/bin/bin-default/getdir",
+		"/opt/binarybox/bin/bin-default/noti",
+		"/opt/binarybox/applications/telepy/telemessage",
+		"/opt/binarybox/applications/telepy/telepy.py",
+		"/home/sungyo/Unison/script/Study/getopts.sh",
+		"/opt/binarybox/applications/telepy/telepy_demon.py",
+		"/opt/binarybox/applications/telepy/telebot.py",
+		"/opt/binarybox/applications/telepy/telepy",
+		"/run/user/1000/gvfs/sftp:host=zentyal.ext,port=22222/opt/binarybox/bin/bin_server/gitup",
+		"/opt/binarybox/binarybox-setup",
+		"/run/user/1000/gvfs/sftp:host=zentyal.ext,port=22222/opt/binarybox/module/BinaryManager/Snmp.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal.ext,port=22222/opt/binarybox/applications/dhcpmonitor/dhcpmonitor.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal.ext,port=22222/opt/binarybox/applications/dhcpmonitor/README",
+		"/run/user/1000/gvfs/sftp:host=zentyal.ext,port=22222/opt/binarybox/module/BinaryManager/Snmp.pyc",
+		"/opt/binarybox/applications/tom_start/bin/tom-start",
+		"/opt/binarybox/applications/telepy/READ",
+		"/opt/binarybox/applications/telepy/token.key",
+		"/opt/binarybox/applications/telepy/telepy.ini",
+		"/opt/binarybox/applications/telebot/telebot",
+		"/opt/binarybox/bin/bin-private/telebot",
+		"/opt/binarybox/bin/bin-default/gitup",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/nodemanager",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/configtest",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/example.cfg",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/example.ini",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/hotssh",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/NodeManager.sublime-workspace",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/.gitignore",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/NodeManager.sublime-project",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/NodeManager/nodes/zentyal.node",
+		"/run/user/1000/gvfs/sftp:host=hp380/opt/binarybox/.gitignore",
+		"/opt/binarybox/bin/bin-private/gitup",
+		"/opt/binarybox/.gitignore",
+		"/home/sungyo/Unison/script/bin/vbox",
+		"/opt/binarybox/applications/greek_bible/sblgnt.py",
+		"/opt/binarybox/applications/greek_bible/greek_bible.py",
+		"/opt/binarybox/README",
+		"/home/sungyo/binarybox/binarybox-setup",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/parseradd.sublime-snippet",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/optionparser.sublime-snippet",
+		"/opt/binarybox/bin/bin-default/logging",
+		"/opt/binarybox/bin/bin-default/log",
+		"/home/sungyo/binarybox/setup.sh",
+		"/home/sungyo/bin/smplayer_cli",
+		"/home/sungyo/opt/bin/logging",
+		"/home/sungyo/bin/bin_vbox/vbox",
+		"/backup/sungyo/openvpn/Ohsan-vpn/cacert.pem",
+		"/backup/sungyo/openvpn/Ohsan-vpn/Ohsan-client.ovpn",
+		"/backup/sungyo/openvpn/Ohsan-vpn/Open-VPN.pem",
+		"/backup/sungyo/openvpn/Ohsan-vpn/7CD591F229A24A53.pem",
+		"/run/user/1000/gvfs/sftp:host=zentyal.int/rpool/2TB/opt/opt/UserScript/local/dhcp_parser/dhcp_parser",
+		"/run/user/1000/gvfs/sftp:host=zentyal.int/rpool/2TB/opt/opt/UserScript/local/dhcp_parser/dhcpd_conf_parser",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/local/dhcpmonitor/dhcpmonitor.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/_Core.py",
+		"/media/sungyo/Win 8.1 Pro/bootmgr",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/Snmp.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/PrintOut.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/__init__.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/local/dhcpmonitor.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/local/dhcp_monitoring/dhcp_parser",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/.dhcpmonitor.dat",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/untitled.sublime-snippet",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/LogTail.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/home/sungyo/test.txt",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/Ping.py",
+		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/local/dhcp_monitoring/dhcpd_conf_parser",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/#--.sublime-snippet",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/startpython.sublime-snippet",
+		"/home/sungyo/Unison/script/module/python/TRASH.py",
+		"/home/sungyo/Unison/script/실행아이콘/setup.sh",
+		"/home/sungyo/Unison/script/module/python/OS.py",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Terminal/Default (Linux).sublime-keymap",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/sungyo/test.txt",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
+		"/home/sungyo/Unison/script/module/python/BinaryManager/__init__.py",
+		"/home/sungyo/Unison/script/module/python/BinaryManager/WhereIs.py",
+		"/home/sungyo/Unison/script/module/python/BinaryManager/_Core.py",
+		"/home/sungyo/Unison/script/python/server/dhcp_monitoring.py",
+		"/home/sungyo/Unison/script/python/xml/xml_example.py",
+		"/home/sungyo/다운로드/graylog-2.1.2/bin/graylogctl",
+		"/home/sungyo/바탕화면/logcheck",
+		"/home/sungyo/Unison/script/module/python/IO.py",
+		"/home/sungyo/Unison/script/module/python/BinaryManager/LogTail.py",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/Default.sublime-keymap",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/userimport.sublime-snippet",
+		"/backup/sungyo/Unison-real/script/module/python/BinaryManager/WhereIs.py",
+		"/home/sungyo/다운로드/vimrc",
+		"/home/sungyo/Unison/script/module/python/BinaryManager/Core.py",
+		"/home/sungyo/Unison/script/module/python/BinaryManager/_Core.pyc",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Python/function.sublime-snippet",
+		"/home/sungyo/Unison/script/sublime-text-2/Packages/Python/self.sublime-snippet",
+		"/home/sungyo/Unison/script/sublime-text-2/Packages/Python/function.sublime-snippet"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"folder_flip",
+			"slide",
+			"onNextPicture",
+			"slide",
+			"previousPicGettingNum",
+			"sort",
+			"wild",
+			"loadimage",
+			"nextPicture",
+			"\n	",
+			"update",
+			"nextPicture",
+			"nextFolder",
+			"updateimages",
+			"nextPic",
+			"right",
+			"update",
+			"load",
+			"wild",
+			"update",
+			"while",
+			"wildcard",
+			"break",
+			"wildcard",
+			"print",
+			"file_path",
+			"path",
+			"dir_path",
+			"updateImage",
+			"updateImages",
+			"pic_dir",
+			"pre v",
+			"pre",
+			"folder_flip",
+			"ImageCtrl",
+			"folder_flip",
+			"imageCtrl",
+			"folder_flip",
+			"imageCtrl",
+			"def next",
+			"def nextPicture",
+			"nextPicture",
+			"folder",
+			"folder_flip",
+			"_folder_flip",
+			"configur",
+			"folder",
+			"dir_flip",
+			"_folder_flip",
+			"onNextPicture",
+			"def onNextPicture",
+			"onNextPicture",
+			"MenuBar",
+			"onNext_picture",
+			"Commend",
+			"fullSceenState",
+			"_full_screen_state\\",
+			"_full_screen_state",
+			"ImageCtrl",
+			"_full_screen_state",
+			"Panel",
+			"way_to_go",
+			"def nextPicture",
+			"nextPicture",
+			"class ImageCtrl",
+			"ImageCtrl",
+			"ViewerMenu",
+			"\nviewerM",
+			"onfull_screen",
+			"onFull_rotate",
+			"path_to_save =",
+			"path_to_save",
+			"state",
+			"path_to_save",
+			"save_folder",
+			"gel_list_file",
+			"save_folder",
+			"GetPictureURL",
+			"no",
+			"savePicture",
+			"getFromPage",
+			"login",
+			"getFromPage",
+			"Page",
+			"page",
+			"root_url",
+			"save_folder",
+			"gel_list",
+			"worker",
+			"p",
+			"exiftime",
+			"exiv",
+			"curl",
+			"Process",
+			"#0121)",
+			"intro",
+			"^ ",
+			"^  ",
+			"big",
+			"q",
+			"\"",
+			"p",
+			"sup",
+			"sub",
+			"<h1>",
+			"3000",
+			"2000",
+			"1000",
+			"50",
+			"50px",
+			"50",
+			"부르심",
+			"p",
+			"h3",
+			"h2",
+			"\\}",
+			"\\{n\\}",
+			"{n}",
+			"<!--(.+?)-->",
+			"\\n",
+			"}",
+			"\\{n\\}",
+			"<!--(.+?)-->",
+			"\\n",
+			",",
+			"\\n",
+			"download_folder",
+			"\\n\\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"which_way_to_go",
+			"self.gel_list_file",
+			"\n",
+			"삼하5:",
+			"",
+			"\n",
+			"}\n",
+			"}",
+			"{n}",
+			"}\n",
+			"}",
+			"{n}",
+			"\n",
+			" ",
+			"\n",
+			" ",
+			"(\\1)",
+			"",
+			"출3:\\1)",
+			"출3:\\1) ",
+			"출3:\\1)",
+			"",
+			"행4:\\1)",
+			"행",
+			"\n",
+			"(\\1)",
+			"\n",
+			"행28:\\1)",
+			"",
+			"행27:\\1)",
+			"삼하",
+			" 삼하3:\\1)",
+			" ",
+			"dir_\\1",
+			"base_dir",
+			"시15:\\1)",
+			" ",
+			"@@logserver.int:1025",
+			":1024",
+			"\\1)",
+			"벧전1:\\1)",
+			"\n",
+			"히6:\\1)",
+			"\\1)",
+			" ",
+			"\n",
+			" \n",
+			"\n",
+			" \n",
+			"\n",
+			"get_process_output",
+			"눅",
+			"행",
+			"",
+			"'",
+			", ",
+			" ",
+			"self.dhcp_list",
+			"dhcp_servers",
+			"renew_dhcp_list",
+			"renew_snmp_list",
+			"dhcpd_conf",
+			"snmp_parser",
+			"",
+			"self._os",
+			"get_process_output",
+			"= self.shelve",
+			"self._test",
+			"self._binary_whereis",
+			"\n",
+			"눅\\1:\\2)",
+			"눅",
+			"</verse>\n",
+			"</verse>a\n",
+			"abbri_eng",
+			"",
+			"\n",
+			", ",
+			"'\\1'",
+			", ",
+			"",
+			"\n",
+			"",
+			"\n",
+			" ",
+			",\n",
+			"",
+			", ",
+			"'\\1'",
+			"",
+			"\n",
+			"",
+			"\n",
+			" ",
+			"\\2,",
+			"\\2",
+			"",
+			"잠",
+			"사",
+			"\\1) ",
+			"",
+			"\\1)",
+			"",
+			" ",
+			"",
+			"시73:\\1)",
+			"",
+			"\n",
+			" ",
+			"{\n",
+			"\n",
+			"{\n",
+			";\n}\n}\n",
+			";\n}\n",
+			";\n",
+			"Yong Joon Moon: ",
+			"Sungyo Kim: ",
+			"",
+			"\nstring.",
+			"string.",
+			"",
+			"\nstring.",
+			"string.\n",
+			"",
+			"\n",
+			"\n\n",
+			"\n",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "GoodViewer.py",
+					"settings":
+					{
+						"buffer_size": 3328,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3159,
+								3159
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2186.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "View/ViewerPanel.py",
+					"settings":
+					{
+						"buffer_size": 9358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9287,
+								9287
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9564.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "BO/thumbnailctrl.py",
+					"settings":
+					{
+						"buffer_size": 75021,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2090,
+								2090
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1922.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "imageCtrl.py",
+					"settings":
+					{
+						"buffer_size": 8872,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3383,
+								3383
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3395.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "MenuBar/ViewerMenuBar.py",
+					"settings":
+					{
+						"buffer_size": 9214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								559,
+								559
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 450.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 44.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 160.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 220.0,
+	"status_bar_visible": true
+}

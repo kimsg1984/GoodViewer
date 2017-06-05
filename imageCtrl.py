@@ -31,7 +31,7 @@ Trash = TRASH.Trash()
 import Data.WildCard
 wildcard = Data.WildCard.getKeywords()
 wildcard_on_listdir = wildcard[1]
-print wildcard_on_listdir
+
 class ImageCtrl():
 	def __init__(self):
 		self.__setClassValues()
@@ -39,12 +39,15 @@ class ImageCtrl():
 	def __setClassValues(self):
 		self.throwed_file = []
 		self.wildcard = '.(%s)' %wildcard_on_listdir
-		self.way_to_go 	= True
+		self.which_way_to_go 	= True
+		self.folder_flip 		= False
+		self.should_flip_folder 	= False
 		self.setClassValuesDefauts()
 
 	def setClassValuesDefauts(self):
 		self.pic_files 	= []
 		self.pic_dir 	= ''
+		self.current_filename = ''
 
 		self.current_num = 0
 		self.next_num 	= 0
@@ -82,14 +85,17 @@ class ImageCtrl():
 		self.throwed_file.append(current_path)
 		
 		if 1 < self.total_pictures:
-			if self.way_to_go: next_num = self.nextPicGettingNum(self.current_num)
+			if self.which_way_to_go: next_num = self.nextPicGettingNum(self.current_num)
 			else : next_num = self.previousPicGettingNum(self.current_num)
 			next_pic_path = self.filePathFromPicNumber(next_num)
 			self.updateImages(next_pic_path)
 			return True
 		else:
-			self.setClassValuesDefauts()
-			return False
+			if self.folder_flip:
+				self.nextFolder()
+			else:
+				self.setClassValuesDefauts()
+				return False
 
 	def restoreImage(self):
 		if self.throwed_file:
@@ -108,7 +114,16 @@ class ImageCtrl():
 		이미지 불러오기, next Picture와 previous Picture 처리
 		"""
 		number 	= self.current_num
+
+		if len(self.pic_files) is 0:
+			if self.folder_flip:
+				if self.which_way_to_go:
+					self.nextFolder()
+				else:
+					self.previousFolder()
+
 		filename 	= self.pic_files[number]
+		self.current_filename = filename
 		
 		# print filename
 		if not self.current_img : self.current_img = self.gettingImgForPanel(filename)
@@ -144,9 +159,20 @@ class ImageCtrl():
 		"""
 		Loads the next picture in the directory
 		"""
+		if self.folder_flip is True:
+			if self.current_num == self.total_pictures - 1:
+				if self.total_pictures > 1:
+					self.nextFolder()
+					return True
+
+			if self.total_pictures is 1:
+				self.nextFolder()
+				return True
+
 		self.pre_num, self.current_num, self.next_num = self.current_num, self.next_num, self.nextPicGettingNum(self.next_num)
 		self.pre_img, self.current_img, self.next_img = self.current_img, self.next_img, None
-		self.way_to_go = True
+		self.which_way_to_go = True
+
 		return True
 
 	def nextPicGettingNum(self, current_num):
@@ -161,19 +187,86 @@ class ImageCtrl():
 		"""
 		Displays the previous picture in the directory
 		"""
+		if self.folder_flip is True:
+			if self.current_num == 0:
+				if self.total_pictures is not 1:
+					self.previousFolder()
+					return True
+
+			if self.total_pictures is 1:
+				self.previousFolder()
+				return True
+
 		self.pre_num, self.current_num, self.next_num = self.previousPicGettingNum(self.pre_num), self.pre_num, self.current_num
 		self.pre_img, self.current_img, self.next_img = None, self.pre_img, self.current_img
-		self.way_to_go = False
+		self.which_way_to_go = False
+
+		
 		return True
 
 	def previousPicGettingNum(self, current_num):
-
 		if current_num == 0:
 			pre_num = self.total_pictures - 1
 		else:
 			pre_num = current_num - 1
-
 		return pre_num
+
+	def nextFolder(self): 
+		dir = os.path.dirname(self.pic_dir)
+		dir_name = os.path.split(dir)[-1]
+		dir_parent = os.path.split(dir)[0]
+		for f in os.walk(dir_parent): 
+			dir_list = f[1]
+			break
+		dir_list.sort()
+		dir_index = dir_list.index(dir_name)
+		dir_len = len(dir_list)
+		count = 0
+		while count <= dir_len -1:
+			dir_index += 1
+			count += 1
+			if dir_index >= dir_len :
+				dir_index = 0
+			next_dir = os.path.join(dir_parent, dir_list[dir_index])
+			next_dir_list = os.listdir(next_dir)
+			pic_files = []
+			for l in next_dir_list:
+				if len(re.findall(r'%s$' %(self.wildcard),l)) > 0:
+					# print(os.path.join(next_dir, l))
+					pic_files.append(l)
+			
+			if len(pic_files) > 0:
+				count = dir_len
+				pic_files.sort()
+				self.updateImages(os.path.join(next_dir, pic_files[0]))
+
+	def previousFolder(self): 
+		dir = os.path.dirname(self.pic_dir)
+		dir_name = os.path.split(dir)[-1]
+		dir_parent = os.path.split(dir)[0]
+		for f in os.walk(dir_parent): 
+			dir_list = f[1]
+			break
+		dir_list.sort()
+		dir_index = dir_list.index(dir_name)
+		dir_len = len(dir_list)
+		count = 0
+		while count <= dir_len -1:
+			dir_index -= 1
+			count += 1
+			if dir_index == 0 :
+				dir_index = dir_len -1
+			next_dir = os.path.join(dir_parent, dir_list[dir_index])
+			next_dir_list = os.listdir(next_dir)
+			pic_files = []
+			for l in next_dir_list:
+				if len(re.findall(r'%s$' %(self.wildcard),l)) > 0:
+					pic_files.append(l)
+
+			if len(pic_files) > 0:
+				count = dir_len
+				pic_files.sort()
+				self.updateImages(os.path.join(next_dir, pic_files[-1]))
 
 	def updateImages(self, file_path):
 		"""
@@ -187,7 +280,6 @@ class ImageCtrl():
 
 		for l in os.listdir(self.pic_dir):
 			if len(re.findall(r'%s$' %(self.wildcard),l)) > 0:
-
 				Log.Logger.debug(re.findall(r'%s$' %(self.wildcard),l))
 				self.pic_files.append(l)
 
@@ -231,6 +323,7 @@ class ImageCtrl():
 		else: return None
 
 	def nextOrFirst(self):
+		if self.folder_flip is True: return True
 		if self.current_num == self.total_pictures - 1 : return False
 		else: return True
 

@@ -5,6 +5,10 @@
 # Email: Kimsg1984@gmail.com
 # irc.freenode #ubuntu-ko Sungyo
 
+'''
+MVP방식. 매뉴바에서 부모 클래스인 패널에 명령을 하면, 패널에서 ImageCtrl로 명렁을 넣어 ImageCtrl에서 조작을 한다
+'''
+
 import wx
 import sys
 reload(sys)
@@ -105,6 +109,7 @@ if __name__ == "__main__":
 		filename=None
 	app = myApp()
 	# filename = '/home/sungyo/Unison/2016/신대원수업/1학기/공관복음/1.png'
+	filename = '/home/sungyo/ImageofGod/작품겔러리/2K™/20130930_1380468745_KIM_1941_2.jpg'
 	if filename:app.activeViewer(filename)
 	else: app.activeThumbnailCtrl()
 	app.MainLoop()

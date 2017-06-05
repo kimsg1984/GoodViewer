@@ -82,6 +82,7 @@ class ViewerMenuBar():
 		# View #
 		viewMenu 					= defineMenu( '&View')
 		self.bar_full_screen		= append(viewMenu, 	self.onFull_screen, "&Full Screen\tF11", "Show on Full Screen", item = wx.ITEM_CHECK)
+		self.bar_folder_flip = append(viewMenu, 	self.onFolder_flip, "Folder F&lip\tAlt+L", "Folder Flip or Rotate", item = wx.ITEM_CHECK)
 
 		viewMenu.AppendSeparator()
 		self.bar_full_rotate_off	= append(viewMenu, 	self.onFull_rotate, "  N&one\tCtrl+Shift+N", "....", item = wx.ITEM_RADIO)
@@ -90,7 +91,7 @@ class ViewerMenuBar():
 
 		viewMenu.AppendSeparator()
 		self.zoom_in 		= append(viewMenu, 	self.onZoomIn, "Zoom In\tCtrl+=", 'Zoom In')
-		self.zoom_out 		= append(viewMenu, 	self.onZoomOut, "Zomm Out\tCtrl+-", 'Zoom Out')
+		self.zoom_out 		= append(viewMenu, 	self.onZoomOut, "Zoom Out\tCtrl+-", 'Zoom Out')
 		self.zoom_fit 		= append(viewMenu, 	self.onZoomFit, "Fit on Window\t=", 'Fit on Window')
 		# viewMenu.AppendSeparator()
 		
@@ -131,7 +132,7 @@ class ViewerMenuBar():
 		elif	rotate_key == 'left'	: self.bar_full_rotate_left.Check()
 		elif 	rotate_key == 'right'	: self.bar_full_rotate_right.Check()
 
-	# 	## <MenuBar> ----------------------------------------------------------------------
+	## <MenuBar Function> ----------------------------------------------------------------------
 
 	def openFile(self, filename):
 		filename = urllib2.unquote(filename).decode('utf8')
@@ -159,6 +160,13 @@ class ViewerMenuBar():
 			self.fullSceenState(False)
 		else:
 			self.fullSceenState(True)
+
+	def onFolder_flip(self, event): 
+		if self.bar_folder_flip.IsChecked(): 
+			self.Panel.onFolderFlip(True)
+		else:	
+			self.Panel.onFolderFlip(False)
+
 
 	def onFull_rotate(self, event):
 		if self.bar_full_rotate_off.IsChecked():
@@ -228,8 +236,9 @@ class ViewerMenuBar():
 		dir = self.Panel._get_CurrentDir()
 		self.parentClass.switchToThumbnailCtrl(dir)
 
-	# # <MenuBar/> ----------------------------------------------------------------------
+	# <MenuBar Function/> ----------------------------------------------------------------------
 
+	# Commend Function #######
 	def renewFileName(self):
 		filename = self.Panel._get_CurrentFileName()
 		if filename : self.parentClass.SetTitle(filename)
@@ -243,7 +252,8 @@ class ViewerMenuBar():
 			self._full_screen_state = False
 			self.Panel._state_fullScreen(False)
 			self.parentClass.ShowFullScreen(False)
-
+	
+	# Keyboard Ctrl #######
 	def onKeyUP(self, event): # let's set the key function
 		keyCode = event.GetKeyCode()
 		if keyCode == wx.WXK_ESCAPE:    # ESC
