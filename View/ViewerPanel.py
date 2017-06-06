@@ -41,7 +41,6 @@ class ViewerPanel(wx.ScrolledWindow):
 		wx.ScrolledWindow.__init__(self, parent)
 		self.ImageCtrl = imageCtrl
 		width, height = wx.DisplaySize()
-		print 'width, height: %s * %s' %(width, height)
 		# Log.Logger.info('width, height: %s * %s' %(width, height))
 		self.photo_max_size = height - 200
 		self.window_size = (height - 200, height - 200)
@@ -209,7 +208,6 @@ class ViewerPanel(wx.ScrolledWindow):
 		pos = (0 , 0)
 
 		if self._zooming:
-			# print  self.GetScaleY[0]
 			new_w, new_h = new_w*self.zoom_ratio, new_h*self.zoom_ratio
 			scroll_size = self.scroll_size
 			scroll_ratio = self.scroll_ratio
@@ -255,7 +253,7 @@ class ViewerPanel(wx.ScrolledWindow):
 	def nextSlide(self, event):
 
 		time = random.randrange(Config.load('slide_time_min'), int(Config.load('slide_time_max')) + 1) # 랜덤 맥스는 '%d 미만'으로 받는다
-		print 'time: %s' %time
+		# Log.Logger.debug('time: %s' %time)
 
 		if self.slideTimer.IsRunning(): 
 			if self.ImageCtrl.nextOrFirst() : self.onNextPicture()
@@ -324,7 +322,6 @@ class ViewerPanel(wx.ScrolledWindow):
 
 	def onDeleteImage(self):
 		result = self.ImageCtrl.deleteImage()
-		print(result)
 		if result is not None:
 			if result is True: 
 				self.loadImage()
@@ -377,9 +374,7 @@ class ViewerPanel(wx.ScrolledWindow):
 		# 20130930_1380468745_KIM_1941_2.jpg
 		date_find = re.findall(r'^[0-9]{8}_', current_filename)
 		if date_find:	
-			print(date_find)	
 			for l in os.listdir(pic_dir):
-				# print(l)
 				find_text = re.findall(r'^%s.+\.txt' %(date_find[0]) ,l)
 				if len(find_text) > 0:
 					address = (File.read(os.path.join(pic_dir, find_text[0])).split('\n'))[0] 

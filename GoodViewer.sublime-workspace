@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"DF_",
+				"DF_TEXT	statement"
+			],
+			[
+				"DF",
+				"DF_FILENAME	statement"
+			],
+			[
+				"Get",
+				"GetBitmap	function"
+			],
+			[
+				"is",
+				"isfile	function"
+			],
+			[
+				"opt",
+				"optionparser	optionparser"
+			],
+			[
+				"Op",
+				"OpenFolder"
+			],
+			[
 				"folder",
 				"folder_flip"
 			],
@@ -18,10 +42,6 @@
 			[
 				"fo",
 				"folder_flip	statement"
-			],
-			[
-				"is",
-				"isdir	function"
 			],
 			[
 				"li",
@@ -494,26 +514,6 @@
 			[
 				"H",
 				"HttpResponse"
-			],
-			[
-				"django",
-				"django_bookmarks"
-			],
-			[
-				"pub",
-				"publisher"
-			],
-			[
-				"pu",
-				"publishing_year"
-			],
-			[
-				"do",
-				"domain"
-			],
-			[
-				"lo",
-				"logged_in"
 			]
 		]
 	},
@@ -523,26 +523,31 @@
 			"file": "GoodViewer.py",
 			"settings":
 			{
-				"buffer_size": 3328,
+				"buffer_size": 3237,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\n# Author: SunGyo Kim\n# Email: Kimsg1984@gmail.com\n# irc.freenode #ubuntu-ko Sungyo\n\nimport wx\nimport sys\nimport random\nreload(sys)\nsys.setdefaultencoding('utf-8')\n\n## 커스텀 모듈 ##\npymodule_path='/home/sungyo/Unison/script/module/python'\nsys.path.append(pymodule_path)\n# sys.path.append('../')\nimport IO\nConfig = IO.Shelve(filename='./Data/gooviewer_config.dat')\nLog	= IO.Log(log_name='ViewerPanel', filelogging=False)\n# Logging    = Log.Logger()\n\nimport View.Configure\n\nimport Data.WildCard\nwildcard = Data.WildCard.getKeywords()\nwildcard_on_listdir = wildcard[1]\n\n# import self.ImageCtrl\n# ImageCtrl = self.ImageCtrl.ImageCtrl()\n\n# class ViewerPanel(wx.Panel):\nclass ViewerPanel(wx.ScrolledWindow):\n	def __init__(self, parent, imageCtrl):\n\n		wx.ScrolledWindow.__init__(self, parent)\n		self.ImageCtrl = imageCtrl\n		width, height = wx.DisplaySize()\n		print 'width, height: %s * %s' %(width, height)\n		# Log.Logger.info('width, height: %s * %s' %(width, height))\n		self.photo_max_size = height - 200\n		self.window_size = (height - 200, height - 200)\n		self.SetBackgroundColour('black')\n		self.__setLayout()\n		self.__setClassValues()\n		self.__setPreViewingControlEvent()\n		self.__setSlideTimerEvent()\n		self.__loadConfig()\n		self.binding()\n		self.SetFocus()\n\n	def __setLayout(self):\n		self.empty_img	= wx.EmptyImage(self.photo_max_size,self.photo_max_size)\n		self.canvus 	= wx.StaticBitmap(self, wx.ID_ANY, wx.BitmapFromImage(self.empty_img))\n		self.Refresh()\n\n	def __setClassValues(self):\n		self.current_img = None\n		self._full_screen_state = False\n		self._set_virtical_screen_rotate = False\n		self._rotate_clockwise = True\n		self._set_image_quelity_high = False\n		self._zooming = False\n		self._drag_on = False\n		self.setZoomDefault()\n\n		self.bind_list = [\n			(self, wx.EVT_SIZE, self.onResize),\n			(self, wx.EVT_LEFT_DOWN, self.onPreviousPicture),\n			(self.canvus, wx.EVT_LEFT_DOWN, self.onLeftDown),\n			(self.canvus, wx.EVT_LEFT_UP, self.onLeftUp),\n			(self.canvus, wx.EVT_MOTION, self.onMotion)\n			]\n\n	def __loadConfig(self):\n\n		rotate_key = Config.load('full_rotate')\n		if rotate_key == 'off' : pass\n\n		elif rotate_key == 'left'	:\n			self._set_virtical_screen_rotate = True\n			self._rotate_clockwise = False\n\n		elif rotate_key == 'right':\n			self._set_virtical_screen_rotate = True\n			self._rotate_clockwise = True\n\n		self._set_image_quelity_high = Config.load('sub_high_quelity')\n\n	def __setPreViewingControlEvent(self):\n		self.prepare_triger = wx.Timer()\n		self.prepare_triger.Bind(wx.EVT_BUTTON, self.ImageCtrl.onPrepare)\n		self.evt = wx.CommandEvent()\n		self.evt.SetEventType(wx.EVT_BUTTON.typeId)\n\n	def __setSlideTimerEvent(self):\n		self.slideTimer = wx.Timer(None)\n		self.slideTimer.Bind(wx.EVT_TIMER, self.nextSlide)\n		if not Config.hasKey('slide_time_min'): Config.save('slide_time_min', 10)\n		if not Config.hasKey('slide_time_max'): Config.save('slide_time_max', 10)\n\n	def _state_fullScreen(self, state):\n		self._full_screen_state = state\n\n	def _get_CurrentFileName(self):\n		return self.ImageCtrl._get_CurrentFileName()\n\n	def _get_CurrentDir(self):\n		return self.ImageCtrl._get_CurrentDir()\n\n	def _set_virticalScreenRotate(self, config):\n		if 	config == 'off':\n			self._set_virtical_screen_rotate = False\n\n		elif 	config == 'right':\n			self._set_virtical_screen_rotate = True\n			self._rotate_clockwise = True\n\n		elif 	config == 'left':\n			self._rotate_clockwise = False\n			self._set_virtical_screen_rotate = True\n\n	def _set_ImageQuelityHigh(self, value):\n		self._set_image_quelity_high=value\n\n	def binding(self, value = True):\n		for b in self.bind_list: b[0].Bind(b[1], b[2])\n\n	def setZoomDefault(self):\n		self._zooming = False\n		self.zoom_ratio = 1\n		self.zoom_power = 1.2\n		self.scroll_size = 0\n		self.scroll_ratio = [0.5, 0.5]\n\n		self.SetScrollbars(0,0,0,0)\n\n	## WORK FUNCTION ##\n\n	def blinkScreen(self):\n		self.canvus 	= wx.StaticBitmap(self, wx.ID_ANY, wx.BitmapFromImage(self.empty_img))\n		self.main_sizer.Add(self.canvus, 1, wx.GROW|wx.ALIGN_CENTER|wx.ALL, 5)\n		self.Refresh()\n\n	def reSize(self, size):\n		self.window_size = size\n		if not self._zooming :\n			try:\n				if self.current_img: self.imageOnPanel(self.current_img)\n			except AttributeError: pass\n		self.Refresh()\n\n	def loadImage(self):\n		self.setZoomDefault()\n		self.current_img = self.ImageCtrl.loadImage()\n		self.imageOnPanel(self.current_img)\n		wx.PostEvent(self.prepare_triger, self.evt)\n\n	def imageOnPanel(self, img):\n\n		## class instance ##\n		window_size = self.window_size\n\n		## Inter Function ####\n		def fullScreenRotate(img):\n			if self._full_screen_state:\n				if self._set_virtical_screen_rotate:\n					if img.GetWidth() < img.GetHeight() : # is the image wide or stand?\n						img = img.Rotate90(clockwise=self._rotate_clockwise) # lay on right\n			return img\n\n		###################\n\n		## full screen rotate ##\n		img = fullScreenRotate(img)\n\n		picture_w = img.GetWidth()\n		picture_h = img.GetHeight()\n		window_w, window_h = window_size[0], window_size[1]\n		if ((float(window_w) / picture_w ) * picture_h ) <= window_h :  # which is fitter? w? or h?\n			new_w = window_w\n			new_h = int((float(new_w) / picture_w ) * picture_h)\n		else:\n			new_h = window_h\n			new_w = int((float(new_h) / picture_h ) * picture_w)\n\n		######################\n		unit = 1\n		distence = 40\n		pos = (0 , 0)\n\n		if self._zooming:\n			# print  self.GetScaleY[0]\n			new_w, new_h = new_w*self.zoom_ratio, new_h*self.zoom_ratio\n			scroll_size = self.scroll_size\n			scroll_ratio = self.scroll_ratio\n\n			if 1 < self.zoom_ratio :\n				## get class values ##\n				view_start = self.GetViewStart()\n\n				if view_start[0] is not 0: scroll_ratio[0] = view_start[0] / float(scroll_size[0] - window_size[0])\n				if view_start[1] is not 0: scroll_ratio[1] = view_start[1] / float(scroll_size[1] - window_size[1])\n\n				scroll_size = ((new_w/unit) + (distence*2), (new_h/unit) + (distence*2))\n				pos = ((scroll_size[0] - window_size[0])*scroll_ratio[0], (scroll_size[1] - window_size[1])*scroll_ratio[1])\n\n			else:\n				scroll_size = (0, 0)\n\n			self.SetScrollbars(unit, unit, scroll_size[0], scroll_size[1])\n\n			## return class values ##\n			self.scroll_size = scroll_size\n\n		## Scale with Set Quelity ###\n		if self._set_image_quelity_high: img = img.Scale(new_w, new_h, wx.IMAGE_QUALITY_HIGH)\n		else: img = img.Scale(new_w, new_h)\n\n		if 1 < self.zoom_ratio:\n			control_position_w = distence\n			control_position_h = distence\n\n		else: # put center\n			control_position_w = int((window_w - new_w) / 2)\n			control_position_h = int((window_h - new_h) / 2)\n\n		self.canvus.SetBitmap(wx.BitmapFromImage(img))\n		self.canvus.SetPosition((control_position_w, control_position_h))\n		self.Scroll(pos[0], pos[1])\n		# self.refreshPanel()\n		filename = self.ImageCtrl._get_CurrentFileName()\n		if filename : self.Parent.SetTitle(filename)\n		self.Refresh()\n\n	def nextSlide(self, event):\n\n		time = random.randrange(Config.load('slide_time_min'), int(Config.load('slide_time_max')) + 1) # 랜덤 맥스는 '%d 미만'으로 받는다\n		print 'time: %s' %time\n\n		if self.slideTimer.IsRunning(): \n			if self.ImageCtrl.nextOrFirst() : self.onNextPicture()\n			else: self.onFirst_picture()\n			self.slideTimer.Stop()\n			self.slideTimer.Start(time*1000) # 100 is a second\n		else:\n			self.slideTimer.Start(time*1000)\n\n	def onResize(self, event):\n		size = self.Parent.GetSize()\n		self.reSize(size)\n\n	def onLeftDown(self, event):\n		if self._zooming:\n			scroll_pos = self.GetViewStart()\n			mouse_pos = event.GetPosition()\n			self._drag_on = (mouse_pos[0] + scroll_pos[0] ,mouse_pos[1] + scroll_pos[1])\n		else:self.onNextPicture()\n\n	def onLeftUp(self, event):\n		self._drag_on = False\n\n	def onMotion(self, event):\n		if self._drag_on is False: return\n		moving_pos = event.GetPosition()\n		x, y = self._drag_on[0] - moving_pos[0], self._drag_on[1] - moving_pos[1]\n		self.Scroll(x, y)\n\n	## Commend Function #########\n\n	def onNextPicture(self, event = None):\n		if self.ImageCtrl.nextPicture(): self.loadImage()\n\n	def onPreviousPicture(self, event = None):\n		if self.ImageCtrl.previousPicture(): self.loadImage()\n\n	def onFolderFlip(self, folder_flip, event = None):\n		self.ImageCtrl.folder_flip = folder_flip\n\n	def onUpdateImages(self, file_path):\n		result = self.ImageCtrl.updateImages(file_path)\n		if result : self.loadImage()\n\n	def onFirst_picture(self):\n		if self.ImageCtrl.firstPicture(): self.loadImage()\n\n	def onLast_picture(self):\n		if self.ImageCtrl.lastPicture(): self.loadImage()\n\n	def onDeleteImage(self):\n		result = self.ImageCtrl.deleteImage()\n		if result is not None:\n			if result is True: self.loadImage()\n			else: self.blinkScreen()\n\n	def onRestoreImage(self):\n		result = self.ImageCtrl.restoreImage()\n		if result is not None:\n			if result is True: self.loadImage()\n\n	def onZoomIn(self):\n		if self.current_img:\n			self._zooming = True\n			self.zoom_ratio = self.zoom_ratio*self.zoom_power\n			self.imageOnPanel(self.current_img)\n\n	def onZoomOut(self):\n		if self.current_img:\n			self._zooming = True\n			self.zoom_ratio = self.zoom_ratio/self.zoom_power\n			self.imageOnPanel(self.current_img)\n\n	def onZoomFit(self):\n		if self.current_img:\n			self.setZoomDefault()\n			self.imageOnPanel(self.current_img)\n\n	def onSlide(self, check):\n		if check:  self.nextSlide(wx.EVT_TIMER)  \n		else: self.slideTimer.Stop()\n\n	def onConfiguration(self):\n		self.Configure = View.Configure.Configure(None, -1, 'Configuration')\n		self.Configure.Show(True)",
+			"file": "/home/sungyo/test.py",
+			"settings":
+			{
+				"buffer_size": 2274,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\nif not wx.TheClipboard.IsOpened(): \n     do = wx.FileDataObject() \n     myroot = u\"C:/Documents and Settings/grant/sofastats/reports/output_test_images\" \n     for filename in os.listdir(myroot): \n         if os.path.splitext(filename)[1] == u\".png\": \n             do.AddFile(os.path.join(myroot, filename)) \n     wx.TheClipboard.Open() \n     wx.TheClipboard.AddData(do) \n     wx.TheClipboard.Close() \n     wx.MessageBox(u\"Finished\") \n",
+			"settings":
+			{
+				"buffer_size": 435,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "View/ViewerPanel.py",
-			"file_size": 9415,
-			"file_write_time": 1496210338000000,
 			"settings":
 			{
-				"buffer_size": 9358,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "BO/thumbnailctrl.py",
-			"settings":
-			{
-				"buffer_size": 75021,
+				"buffer_size": 11260,
 				"line_ending": "Unix"
 			}
 		},
@@ -550,7 +555,7 @@
 			"file": "imageCtrl.py",
 			"settings":
 			{
-				"buffer_size": 8872,
+				"buffer_size": 8868,
 				"line_ending": "Unix"
 			}
 		},
@@ -627,6 +632,11 @@
 	},
 	"file_history":
 	[
+		"/home/sungyo/Unison/Application/GoodViewer/BO/thumbnailctrl.py",
+		"/opt/binarybox/module/python/IO.py",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/untitled.sublime-snippet",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/optionparser.sublime-snippet",
+		"/home/sungyo/바탕화면/test.py",
 		"/home/sungyo/Unison/Application/GoodViewer/MenuBar/ViewerMenuBar.py",
 		"/home/sungyo/Unison/Application/GoodViewer/MenuBar/ThumbScrollMenuBar.py",
 		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/jackpum_gel2.py",
@@ -638,7 +648,6 @@
 		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/subject_gel.py",
 		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/jackpum_gel.py",
 		"/run/user/1000/gvfs/sftp:host=hp380/home/sungyo/Zentyal/mnt/sda/sungyo/문서/사진/각종바탕화면/ImageOfGod/slrclub/작품겔러리/gel_list.txt",
-		"/opt/binarybox/module/python/IO.py",
 		"/home/sungyo/result.txt",
 		"/home/sungyo/script.py",
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/importcustom.sublime-snippet",
@@ -699,7 +708,6 @@
 		"/opt/binarybox/README",
 		"/home/sungyo/binarybox/binarybox-setup",
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/parseradd.sublime-snippet",
-		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/optionparser.sublime-snippet",
 		"/opt/binarybox/bin/bin-default/logging",
 		"/opt/binarybox/bin/bin-default/log",
 		"/home/sungyo/binarybox/setup.sh",
@@ -721,7 +729,6 @@
 		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/local/dhcpmonitor.py",
 		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/local/dhcp_monitoring/dhcp_parser",
 		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/.dhcpmonitor.dat",
-		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/untitled.sublime-snippet",
 		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/LogTail.py",
 		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/home/sungyo/test.txt",
 		"/run/user/1000/gvfs/sftp:host=zentyal,port=22222/opt/UserScript/share/BinaryManager/Ping.py",
@@ -752,9 +759,7 @@
 		"/home/sungyo/다운로드/vimrc",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/Core.py",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/_Core.pyc",
-		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Python/function.sublime-snippet",
-		"/home/sungyo/Unison/script/sublime-text-2/Packages/Python/self.sublime-snippet",
-		"/home/sungyo/Unison/script/sublime-text-2/Packages/Python/function.sublime-snippet"
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Python/function.sublime-snippet"
 	],
 	"find":
 	{
@@ -773,6 +778,63 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"gettingImgForPanel",
+			"current_img",
+			"current_imgf",
+			"current_img",
+			"bitmap",
+			"log",
+			" opj",
+			"opj",
+			"paste",
+			"Object",
+			"ojbect",
+			"myroot",
+			"TheClipboard",
+			"copy",
+			"print",
+			"Log",
+			"deleteI",
+			"onUpdateImages",
+			"updateImages",
+			"update",
+			"load",
+			"self.updateImages",
+			" updateImages",
+			"updateImages",
+			"nextFolder",
+			"update",
+			"next_pic_path",
+			"updateImages",
+			"Show",
+			"ViewerMenuBar",
+			"ShowFullScreen",
+			"fullsc",
+			"full",
+			"Full",
+			"FullSc",
+			"_full_screen_state",
+			"full",
+			"SetFocus",
+			"orRightClickMenuSelection",
+			"menu_title_by_id",
+			"menu_titles",
+			"onLeftDown",
+			"ImageCtrl",
+			"frame",
+			"list_item_clicked",
+			"menu_title_by_id",
+			"RightClickMenuSelection",
+			"list_item_clicked",
+			"Menu(",
+			"Menu",
+			"menu_title_by_id",
+			"menu_titles",
+			"right_click_context",
+			"onLeftUp",
+			"click",
+			"Searching",
+			"onClick",
 			"folder_flip",
 			"slide",
 			"onNextPicture",
@@ -843,64 +905,7 @@
 			"\nviewerM",
 			"onfull_screen",
 			"onFull_rotate",
-			"path_to_save =",
-			"path_to_save",
-			"state",
-			"path_to_save",
-			"save_folder",
-			"gel_list_file",
-			"save_folder",
-			"GetPictureURL",
-			"no",
-			"savePicture",
-			"getFromPage",
-			"login",
-			"getFromPage",
-			"Page",
-			"page",
-			"root_url",
-			"save_folder",
-			"gel_list",
-			"worker",
-			"p",
-			"exiftime",
-			"exiv",
-			"curl",
-			"Process",
-			"#0121)",
-			"intro",
-			"^ ",
-			"^  ",
-			"big",
-			"q",
-			"\"",
-			"p",
-			"sup",
-			"sub",
-			"<h1>",
-			"3000",
-			"2000",
-			"1000",
-			"50",
-			"50px",
-			"50",
-			"부르심",
-			"p",
-			"h3",
-			"h2",
-			"\\}",
-			"\\{n\\}",
-			"{n}",
-			"<!--(.+?)-->",
-			"\\n",
-			"}",
-			"\\{n\\}",
-			"<!--(.+?)-->",
-			"\\n",
-			",",
-			"\\n",
-			"download_folder",
-			"\\n\\n"
+			"path_to_save ="
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -908,6 +913,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"onRightClickMenuSelection",
+			"self.menu_title_by_id",
+			"orRightClickMenuSelection",
 			"which_way_to_go",
 			"self.gel_list_file",
 			"\n",
@@ -1032,10 +1040,7 @@
 			"\nstring.",
 			"string.\n",
 			"",
-			"\n",
-			"\n\n",
-			"\n",
-			""
+			"\n"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1046,7 +1051,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1054,15 +1059,15 @@
 					"file": "GoodViewer.py",
 					"settings":
 					{
-						"buffer_size": 3328,
+						"buffer_size": 3237,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3159,
-								3159
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1071,52 +1076,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2186.0,
+						"translation.y": 3012.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "View/ViewerPanel.py",
+					"file": "/home/sungyo/test.py",
 					"settings":
 					{
-						"buffer_size": 9358,
+						"buffer_size": 2274,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9287,
-								9287
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 9564.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "BO/thumbnailctrl.py",
-					"settings":
-					{
-						"buffer_size": 75021,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2090,
-								2090
+								1212,
+								1212
 							]
 						],
 						"settings":
@@ -1126,25 +1104,51 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1922.0,
+						"translation.y": 373.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "imageCtrl.py",
+					"buffer": 2,
 					"settings":
 					{
-						"buffer_size": 8872,
+						"buffer_size": 435,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3383,
-								3383
+								213,
+								213
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "View/ViewerPanel.py",
+					"settings":
+					{
+						"buffer_size": 11260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11260,
+								11260
 							]
 						],
 						"settings":
@@ -1153,13 +1157,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3395.0,
+						"translation.y": 11006.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
+					"file": "imageCtrl.py",
+					"settings":
+					{
+						"buffer_size": 8868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8868,
+								8868
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9425.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "MenuBar/ViewerMenuBar.py",
 					"settings":
 					{
@@ -1170,8 +1201,8 @@
 						"selection":
 						[
 							[
-								559,
-								559
+								257,
+								257
 							]
 						],
 						"settings":
@@ -1180,7 +1211,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 450.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

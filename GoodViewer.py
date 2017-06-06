@@ -103,13 +103,23 @@ class myApp(wx.PySimpleApp):
 		except AttributeError: pass
 
 if __name__ == "__main__":
-	try:
-		filename = sys.argv[1]
-	except:
-		filename=None
+	## Parser Setting ##
+	filename=None
+	argv = __import__('sys').argv
+	usage = u"Usage: %prog [options]"
+	parser = __import__('optparse').OptionParser(usage)
+
+	## Parser Option ##	
+	parser.add_option('-d', '--debug', dest='debug', action='store_true', help=u'debug mode')
+	
+	## command logic  ##
+	(opt, argv) = parser.parse_args(argv)
+	if opt.debug:
+		# filename = '/home/sungyo/Unison/2016/신대원수업/1학기/공관복음/1.png'
+		filename = '/home/sungyo/ImageofGod/작품겔러리/2K™/20130930_1380468745_KIM_1941_2.jpg'
+	if len(argv) >= 2: filename = argv[1]
+
 	app = myApp()
-	# filename = '/home/sungyo/Unison/2016/신대원수업/1학기/공관복음/1.png'
-	filename = '/home/sungyo/ImageofGod/작품겔러리/2K™/20130930_1380468745_KIM_1941_2.jpg'
 	if filename:app.activeViewer(filename)
 	else: app.activeThumbnailCtrl()
 	app.MainLoop()
