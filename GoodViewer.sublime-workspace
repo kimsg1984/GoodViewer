@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Lo",
+				"Logger"
+			],
+			[
 				"DF_",
 				"DF_TEXT	statement"
 			],
@@ -510,36 +514,19 @@
 			[
 				"mor",
 				"morphgnt_rows"
-			],
-			[
-				"H",
-				"HttpResponse"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"contents": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\n# Author: SunGyo Kim\n# Email: Kimsg1984@gmail.com\n# irc.freenode #ubuntu-ko Sungyo\n\n'''\nMVP방식. 매뉴바에서 부모 클래스인 패널에 명령을 하면, 패널에서 ImageCtrl로 명렁을 넣어 ImageCtrl에서 조작을 한다\n'''\n\nimport wx\nimport sys\nreload(sys)\nsys.setdefaultencoding('utf-8')\n\n## Application Module ##\nimport View.ViewerPanel\nimport View.ThumbScrollPanel\nimport MenuBar.ViewerMenuBar\nimport MenuBar.ThumbScrollMenuBar\nimport imageCtrl\ntitle = \"Good Viewer\"\n\nclass ViewerFrame(wx.Frame):\n	def __init__(self,parent, ImageCTRL):\n		wx.Frame.__init__(self, None, title=title)\n		self.ImageCtrl = ImageCTRL\n		self.parentClass = parent\n		self.SetMinSize((400, 400))\n		self.ViewerPanel = View.ViewerPanel.ViewerPanel(self, self.ImageCtrl)\n		self.ViewerMenuBar = MenuBar.ViewerMenuBar.ViewerMenuBar(self, self.ViewerPanel)\n		self.ViewerPanel.Show()\n		self.sizer = wx.BoxSizer(wx.VERTICAL)\n		self.sizer.Add(self.ViewerPanel, 1, wx.GROW | wx.ALL)\n		self.ViewerMenuBar.showMenuBar()\n		self.SetSizer(self.sizer)\n		self.Center()\n\n	def show(self, filename = None, switch = False):\n		if filename : self.ViewerMenuBar.openFile(filename)\n		self.ViewerMenuBar.switch(switch)\n		self.sizer.Fit(self)\n		self.SetFocus()\n		self.Show()\n\n	def hide(self):\n		self.Hide()\n\n	def switchToThumbnailCtrl(self, dir = None):\n		self.parentClass.activeThumbnailCtrl(dir)\n		self.hide()\n\nclass ThumbnailCtrlFrame(wx.Frame):\n	def __init__(self, parent, ImageCTRL):\n		wx.Frame.__init__(self, None, title=title)\n		self.ImageCtrl = ImageCTRL\n		self.parentClass = parent\n		self.ThumbScrollPanel = View.ThumbScrollPanel.ThumbScrollPanel(self, self.ImageCtrl)\n		self.ThumbScrollMenuBar = MenuBar.ThumbScrollMenuBar.ThumbScrollMenuBar(self, self.ThumbScrollPanel)\n		self.ThumbScrollMenuBar.showMenuBar()\n		self.sizer = wx.BoxSizer(wx.VERTICAL)\n		self.sizer.Add(self.ThumbScrollPanel, 1, wx.GROW | wx.ALL)\n		self.SetSizer(self.sizer)\n\n	def show(self, dir = None):\n		self.SetFocus()\n		if dir: self.ThumbScrollPanel.showDir(dir)\n		self.Show()\n\n\n	def hide(self):\n		self.Hide()\n\n	def switchToViewer(self, filename = None):\n		self.parentClass.activeViewer(filename, switch = True)\n		self.hide()\n		# self.show()\n\nclass myApp(wx.PySimpleApp):\n	def __init__(self):\n		wx.PySimpleApp.__init__(self)\n		self.ImageCtrl = imageCtrl.ImageCtrl()\n\n	def activeViewer(self, filename=None, switch = False):\n		try: self.Viewerframe.show(filename, switch)\n		except AttributeError:\n			self.Viewerframe = ViewerFrame(self, self.ImageCtrl)\n			self.Viewerframe.show(filename, switch)\n			self.Viewerframe.Center()\n\n		try: self.ThumbnailCtrlFrame.hide()\n		except AttributeError: pass\n\n	def activeThumbnailCtrl(self, dir=None):\n		try: self.ThumbnailCtrlFrame.show(dir)\n		except AttributeError:\n			self.ThumbnailCtrlFrame = ThumbnailCtrlFrame(self, self.ImageCtrl)\n			self.ThumbnailCtrlFrame.show(dir)\n\n		try: self.Viewerframe.hide()\n		except AttributeError: pass\n\nif __name__ == \"__main__\":\n	## Parser Setting ##\n	filename=None\n	argv = __import__('sys').argv\n	usage = u\"Usage: %prog [options]\"\n	parser = __import__('optparse').OptionParser(usage)\n\n	## Parser Option ##	\n	parser.add_option('-d', '--debug', dest='debug', action='store_true', help=u'debug mode')\n	\n	## command logic  ##\n	(opt, argv) = parser.parse_args(argv)\n	if opt.debug:\n		# filename = '/home/sungyo/Unison/2016/신대원수업/1학기/공관복음/1.png'\n		filename = '/home/sungyo/ImageofGod/작품겔러리/2K™/20130930_1380468745_KIM_1941_2.jpg'\n	if len(argv) >= 2: filename = argv[1]\n\n	app = myApp()\n	if filename:app.activeViewer(filename)\n	else: app.activeThumbnailCtrl()\n	app.MainLoop()",
 			"file": "GoodViewer.py",
+			"file_size": 3680,
+			"file_write_time": 1496722335000000,
 			"settings":
 			{
-				"buffer_size": 3237,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/sungyo/test.py",
-			"settings":
-			{
-				"buffer_size": 2274,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "\nif not wx.TheClipboard.IsOpened(): \n     do = wx.FileDataObject() \n     myroot = u\"C:/Documents and Settings/grant/sofastats/reports/output_test_images\" \n     for filename in os.listdir(myroot): \n         if os.path.splitext(filename)[1] == u\".png\": \n             do.AddFile(os.path.join(myroot, filename)) \n     wx.TheClipboard.Open() \n     wx.TheClipboard.AddData(do) \n     wx.TheClipboard.Close() \n     wx.MessageBox(u\"Finished\") \n",
-			"settings":
-			{
-				"buffer_size": 435,
+				"buffer_size": 3555,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,15 +534,18 @@
 			"file": "View/ViewerPanel.py",
 			"settings":
 			{
-				"buffer_size": 11260,
+				"buffer_size": 11142,
 				"line_ending": "Unix"
 			}
 		},
 		{
+			"contents": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\n# Author: SunGyo Kim\n# Email: Kimsg1984@gmail.com\n# irc.freenode #ubuntu-ko Sungyo\n\nimport os\nimport re\nimport wx\nimport StringIO\nimport urllib2\nimport sys\nimport random\nreload(sys)\n\n## 커스텀 모듈 ####\npymodule_path='/home/sungyo/Unison/script/module/python'\nsys.path.append(pymodule_path)\n# sys.path.append('../') # for debuging\n\nimport IO\nConfig = IO.Shelve(filename='./Data/gooviewer_config.dat')\nLog	= IO.Log(log_name='ImageCtrl', filelogging=False)\n\nimport TRASH\nTrash = TRASH.Trash()\n\n#################\n\nimport Data.WildCard\nwildcard = Data.WildCard.getKeywords()\nwildcard_on_listdir = wildcard[1]\n\nclass ImageCtrl():\n	def __init__(self):\n		self.__setClassValues()\n\n	def __setClassValues(self):\n		self.throwed_file = []\n		self.wildcard = '.(%s)' %wildcard_on_listdir\n		self.which_way_to_go 	= True\n		self.folder_flip 		= False\n		self.should_flip_folder 	= False\n		self.setClassValuesDefauts()\n\n	def setClassValuesDefauts(self):\n		self.pic_files 	= []\n		self.pic_dir 	= ''\n		self.current_filename = ''\n\n		self.current_num = 0\n		self.next_num 	= 0\n		self.pre_num 	= 0\n		self.total_pictures= 0\n\n		self.current_img 	= None\n		self.next_img 	= None\n		self.pre_img 	= None\n\n	def _get_CurrentFileName(self):\n		if self.pic_files:\n			filename = self.pic_files[self.current_num]\n			return filename\n		else:\n			return False\n\n	def _get_CurrentDir(self):\n		if self.pic_dir: return self.pic_dir\n		else: return False\n\n	## WORK FUNCTION ##\n\n	def filePathFromPicNumber(self, number):\n		file_name = self.pic_files[number]\n		file_path = os.path.join(self.pic_dir, file_name)\n		return file_path\n\n	def deleteImage(self): \n		current_path = os.path.join(self.pic_dir, self.pic_files[self.current_num])\n		current_path = str(unicode(current_path))\n		current_path_incoded = urllib2.quote(current_path)\n	\n		if not Trash.put(current_path): return None\n		self.throwed_file.append(current_path)\n		\n		if 1 < self.total_pictures:\n			if self.which_way_to_go: next_num = self.nextPicGettingNum(self.current_num)\n			else : next_num = self.previousPicGettingNum(self.current_num)\n			next_pic_path = self.filePathFromPicNumber(next_num)\n			self.updateImages(next_pic_path)\n		else:\n			if self.folder_flip:\n				self.nextFolder()\n			else:\n				self.setClassValuesDefauts()\n		return True\n\n	def restoreImage(self):\n		if self.throwed_file:\n			restore_file_name = self.throwed_file.pop()\n			restore_file_path = os.path.join(self.pic_dir, restore_file_name)\n			if Trash.search(restore_file_path):\n				file_name_in_trash = Trash.search(restore_file_path)[0][1]\n				Trash.restore(file_name_in_trash)\n				\n				self.updateImages(restore_file_path) # 이미지 가져와서 던질것!!!\n			else: return False\n		else: return False\n\n	def loadImage(self):\n		\"\"\"\n		이미지 불러오기, next Picture와 previous Picture 처리\n		\"\"\"\n		number 	= self.current_num\n\n		if len(self.pic_files) is 0:\n			if self.folder_flip:\n				if self.which_way_to_go:\n					self.nextFolder()\n				else:\n					self.previousFolder()\n\n		filename 	= self.pic_files[number]\n		self.current_filename = filename\n		\n		# print filename\n		if not self.current_img : self.current_img = self.gettingImgForPanel(filename)\n\n		# self.imageOnPanel(self.current_img)\n		return self.current_img\n		## second, prepare the Previous and Next pictures ##\n\n	def gettingImgForPanel(self, filename):\n		## class instance \n		dir = self.pic_dir\n		image_path = os.path.join(dir, filename)\n		if wx.Image.CanRead(filename=image_path):\n			img = wx.Image(name=image_path)\n		else:\n			img = wx.EmptyImage(200, 200)\n		return img\n\n	def preparePictures(self):\n		\"\"\"\n		next_picture  와 pre_picture 불러놓기\n		\"\"\"\n		## class instance ##\n		next_pic_path 	= self.pic_files[self.next_num]\n		pre_pic_path 	= self.pic_files[self.pre_num]\n\n		if not self.next_img : self.next_img = self.gettingImgForPanel(next_pic_path)\n		if not self.pre_img : self.pre_img = self.gettingImgForPanel(pre_pic_path) \n		\n		return True\n\n	def nextPicture(self):\n		\"\"\"\n		Loads the next picture in the directory\n		\"\"\"\n		if self.folder_flip is True:\n			if self.current_num == self.total_pictures - 1:\n				if self.total_pictures > 1:\n					self.nextFolder()\n					return True\n\n			if self.total_pictures is 1:\n				self.nextFolder()\n				return True\n\n		self.pre_num, self.current_num, self.next_num = self.current_num, self.next_num, self.nextPicGettingNum(self.next_num)\n		self.pre_img, self.current_img, self.next_img = self.current_img, self.next_img, None\n		self.which_way_to_go = True\n\n		return True\n\n	def nextPicGettingNum(self, current_num):\n		if current_num == self.total_pictures - 1:\n			next_num = 0\n		else:\n			next_num = current_num + 1\n\n		return next_num\n\n	def previousPicture(self):\n		\"\"\"\n		Displays the previous picture in the directory\n		\"\"\"\n		if self.folder_flip is True:\n			if self.current_num == 0:\n				if self.total_pictures is not 1:\n					self.previousFolder()\n					return True\n\n			if self.total_pictures is 1:\n				self.previousFolder()\n				return True\n\n		self.pre_num, self.current_num, self.next_num = self.previousPicGettingNum(self.pre_num), self.pre_num, self.current_num\n		self.pre_img, self.current_img, self.next_img = None, self.pre_img, self.current_img\n		self.which_way_to_go = False\n\n		\n		return True\n\n	def previousPicGettingNum(self, current_num):\n		if current_num == 0:\n			pre_num = self.total_pictures - 1\n		else:\n			pre_num = current_num - 1\n		return pre_num\n\n	def nextFolder(self): \n		dir = os.path.dirname(self.pic_dir)\n		dir_name = os.path.split(dir)[-1]\n		dir_parent = os.path.split(dir)[0]\n		for f in os.walk(dir_parent): \n			dir_list = f[1]\n			break\n		dir_list.sort()\n		dir_index = dir_list.index(dir_name)\n		dir_len = len(dir_list)\n		count = 0\n		while count <= dir_len -1:\n			dir_index += 1\n			count += 1\n			if dir_index >= dir_len :\n				dir_index = 0\n			next_dir = os.path.join(dir_parent, dir_list[dir_index])\n			next_dir_list = os.listdir(next_dir)\n			pic_files = []\n			for l in next_dir_list:\n				if len(re.findall(r'%s$' %(self.wildcard),l)) > 0:\n					# print(os.path.join(next_dir, l))\n					pic_files.append(l)\n			\n			if len(pic_files) > 0:\n				count = dir_len\n				pic_files.sort()\n				self.updateImages(os.path.join(next_dir, pic_files[0]))\n\n	def previousFolder(self): \n		dir = os.path.dirname(self.pic_dir)\n		dir_name = os.path.split(dir)[-1]\n		dir_parent = os.path.split(dir)[0]\n		for f in os.walk(dir_parent): \n			dir_list = f[1]\n			break\n		dir_list.sort()\n		dir_index = dir_list.index(dir_name)\n		dir_len = len(dir_list)\n		count = 0\n		while count <= dir_len -1:\n			dir_index -= 1\n			count += 1\n			if dir_index == 0 :\n				dir_index = dir_len -1\n			next_dir = os.path.join(dir_parent, dir_list[dir_index])\n			next_dir_list = os.listdir(next_dir)\n			pic_files = []\n			for l in next_dir_list:\n				if len(re.findall(r'%s$' %(self.wildcard),l)) > 0:\n					pic_files.append(l)\n\n			if len(pic_files) > 0:\n				count = dir_len\n				pic_files.sort()\n				self.updateImages(os.path.join(next_dir, pic_files[-1]))\n\n	def updateImages(self, file_path):\n		\"\"\"\n		Updates the pic_files list to contain the current folder's images\n		\"\"\"\n		self.setClassValuesDefauts()\n		index_file = file_path.split('/')[-1]\n		folder_path = file_path.split(index_file)[0]\n		self.pic_dir = folder_path\n		self.pic_files = []\n\n		for l in os.listdir(self.pic_dir):\n			if len(re.findall(r'%s$' %(self.wildcard),l)) > 0:\n				Log.Logger.debug(re.findall(r'%s$' %(self.wildcard),l))\n				self.pic_files.append(l)\n\n		Log.Logger.debug(self.pic_files)\n		self.pic_files.sort()\n		self.total_pictures = len(self.pic_files)\n\n		self.current_num =self.pic_files.index(index_file)\n		self.next_num = self.nextPicGettingNum(self.current_num)\n		self.pre_num = self.previousPicGettingNum(self.current_num)\n		return True\n\n	def goOnNumber(self, number):\n		if self.total_pictures == 0 : return False\n		number = int(number)\n		if 0 <= number < self.total_pictures:\n			file_path = self.filePathFromPicNumber(number)\n			if self.updateImages(file_path): return True\n		else: return False\n\n	def firstPicture(self):\n		if self.total_pictures > 1: \n			if self.goOnNumber(0): return True\n\n	def lastPicture(self):\n		if self.total_pictures > 1: \n			if self.goOnNumber(self.total_pictures - 1): return True\n\n	def restoreImage(self): \n		if self.throwed_file:\n			restore_file_name = self.throwed_file.pop()\n			restore_file_path = os.path.join(self.pic_dir, restore_file_name)\n			if Trash.search(restore_file_path):\n				file_name_in_trash = Trash.search(restore_file_path)[0][1]\n				if Trash.restore(file_name_in_trash):\n					self.updateImages(restore_file_path)\n					return True\n				else: return False\n			else: return False\n		else: return None\n\n	def nextOrFirst(self):\n		if self.folder_flip is True: return True\n		if self.current_num == self.total_pictures - 1 : return False\n		else: return True\n\n	def onPrepare(self, event):\n		\"\"\"\n		prepare the nex and previous pictures. it makes faster.\n		\"\"\"        \n		self.preparePictures()\n",
 			"file": "imageCtrl.py",
+			"file_size": 8928,
+			"file_write_time": 1496722508000000,
 			"settings":
 			{
-				"buffer_size": 8868,
+				"buffer_size": 8846,
 				"line_ending": "Unix"
 			}
 		},
@@ -632,6 +622,7 @@
 	},
 	"file_history":
 	[
+		"/home/sungyo/test.py",
 		"/home/sungyo/Unison/Application/GoodViewer/BO/thumbnailctrl.py",
 		"/opt/binarybox/module/python/IO.py",
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/untitled.sublime-snippet",
@@ -758,8 +749,7 @@
 		"/backup/sungyo/Unison-real/script/module/python/BinaryManager/WhereIs.py",
 		"/home/sungyo/다운로드/vimrc",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/Core.py",
-		"/home/sungyo/Unison/script/module/python/BinaryManager/_Core.pyc",
-		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Python/function.sublime-snippet"
+		"/home/sungyo/Unison/script/module/python/BinaryManager/_Core.pyc"
 	],
 	"find":
 	{
@@ -778,6 +768,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"print",
+			"print\\",
+			"print",
+			"Log.Logger",
+			"print",
 			"gettingImgForPanel",
 			"current_img",
 			"current_imgf",
@@ -900,12 +895,7 @@
 			"def nextPicture",
 			"nextPicture",
 			"class ImageCtrl",
-			"ImageCtrl",
-			"ViewerMenu",
-			"\nviewerM",
-			"onfull_screen",
-			"onFull_rotate",
-			"path_to_save ="
+			"ImageCtrl"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1051,7 +1041,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1059,15 +1049,15 @@
 					"file": "GoodViewer.py",
 					"settings":
 					{
-						"buffer_size": 3237,
+						"buffer_size": 3555,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2974,
+								2974
 							]
 						],
 						"settings":
@@ -1076,121 +1066,67 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3012.0,
+						"translation.y": 2544.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/sungyo/test.py",
+					"file": "View/ViewerPanel.py",
 					"settings":
 					{
-						"buffer_size": 2274,
+						"buffer_size": 11142,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1212,
-								1212
+								10917,
+								10917
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 373.0,
+						"translation.y": 11224.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "imageCtrl.py",
 					"settings":
 					{
-						"buffer_size": 435,
+						"buffer_size": 8846,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								213,
-								213
+								5951,
+								5951
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 6822.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "View/ViewerPanel.py",
-					"settings":
-					{
-						"buffer_size": 11260,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11260,
-								11260
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 11006.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "imageCtrl.py",
-					"settings":
-					{
-						"buffer_size": 8868,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8868,
-								8868
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 9425.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "MenuBar/ViewerMenuBar.py",
 					"settings":
 					{
@@ -1201,8 +1137,8 @@
 						"selection":
 						[
 							[
-								257,
-								257
+								8867,
+								8867
 							]
 						],
 						"settings":
@@ -1211,7 +1147,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 8031.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
