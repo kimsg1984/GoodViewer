@@ -35,6 +35,7 @@ wildcard_on_listdir = wildcard[1]
 class ImageCtrl():
 	def __init__(self):
 		self.__setClassValues()
+		self.__setFileHistory()
 
 	def __setClassValues(self):
 		self.throwed_file = []
@@ -43,6 +44,11 @@ class ImageCtrl():
 		self.folder_flip 		= False
 		self.should_flip_folder 	= False
 		self.setClassValuesDefauts()
+
+	def __setFileHistory(self):
+		self.filehistory = wx.FileHistory(8)
+		self.history_config = wx.Config("Good Viewer", style=wx.CONFIG_USE_LOCAL_FILE)
+		self.filehistory.Load(self.history_config)
 
 	def setClassValuesDefauts(self):
 		self.pic_files 	= []
@@ -137,6 +143,7 @@ class ImageCtrl():
 		image_path = os.path.join(dir, filename)
 		if wx.Image.CanRead(filename=image_path):
 			img = wx.Image(name=image_path)
+			self.saveHistory(image_path)
 		else:
 			img = wx.EmptyImage(200, 200)
 		return img
@@ -314,7 +321,6 @@ class ImageCtrl():
 			if Trash.search(restore_file_path):
 				file_name_in_trash = Trash.search(restore_file_path)[0][1]
 				if Trash.restore(file_name_in_trash):
-					print 'restored'
 					self.updateImages(restore_file_path)
 					return True
 				else: return False
@@ -331,3 +337,7 @@ class ImageCtrl():
 		prepare the nex and previous pictures. it makes faster.
 		"""        
 		self.preparePictures()
+
+	def saveHistory(self, filepath):
+		self.filehistory.AddFileToHistory(filepath)
+		self.filehistory.Save(self.history_config)

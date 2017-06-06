@@ -23,13 +23,15 @@ import IO
 Config = IO.Shelve(filename='./Data/gooviewer_config.dat')
 File = IO.File()
 Log	= IO.Log(log_name='ViewerPanel', filelogging=False)
-# Logging    = Log.Logger()
+
 
 import View.Configure
 
 import Data.WildCard
 wildcard = Data.WildCard.getKeywords()
 wildcard_on_listdir = wildcard[1]
+
+
 
 # import self.ImageCtrl
 # ImageCtrl = self.ImageCtrl.ImageCtrl()
@@ -79,7 +81,6 @@ class ViewerPanel(wx.ScrolledWindow):
 			]
 
 	def __loadConfig(self):
-
 		rotate_key = Config.load('full_rotate')
 		if rotate_key == 'off' : pass
 
@@ -168,7 +169,7 @@ class ViewerPanel(wx.ScrolledWindow):
 			except AttributeError: pass
 		self.Refresh()
 
-	def loadImage(self):
+	def loadImage(self): # work
 		self.setZoomDefault()
 		self.current_img = self.ImageCtrl.loadImage()
 		self.imageOnPanel(self.current_img)

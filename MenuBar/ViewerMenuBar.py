@@ -22,9 +22,10 @@ class ViewerMenuBar():
 	def __init__(self, parent, panel):
 		self.parentClass = parent
 		self.Panel = panel
-		self.setMenuBar()
 
 		self.__setClassValues()
+		self.__setFileHistory()
+		self.setMenuBar()
 		self.__loadConfig()
 
 	def __setClassValues(self):
@@ -32,6 +33,11 @@ class ViewerMenuBar():
 		self._full_screen_state = False
 		self._switch = False
 		self._on_slide_state = False
+
+	def __setFileHistory(self):
+		self.filehistory = wx.FileHistory(5)
+		self.history_config = wx.Config("Good Viewer", style=wx.CONFIG_USE_LOCAL_FILE)
+		self.filehistory.Load(self.history_config)
 
 	def  setMenuBar(self):
 
@@ -51,11 +57,11 @@ class ViewerMenuBar():
 
 			if item: 	result = menu.Append(id, element_name, comment, item)
 			else: 		result = menu.Append(id, element_name, comment)
-			self.bind_list.append((bind_function, result))
+			if bind_function:	self.bind_list.append((bind_function, result))
 			return result
 		
-		def subMenu(main_menu, element_name):
-			sub_menu = wx.Menu()
+		def subMenu(main_menu, element_name, sub_menu = None):
+			if not sub_menu: sub_menu = wx.Menu()
        			main_menu.AppendMenu(wx.NewId(), element_name, sub_menu)
        			return sub_menu 
 
@@ -66,11 +72,18 @@ class ViewerMenuBar():
 					"slide_show"		: "Start Slide Show"
 				} # for long comment..
 
+		# set filehistory
+		bar_recent_files = wx.Menu()
+		self.filehistory.UseMenu(bar_recent_files)
+		self.filehistory.AddFilesToMenu() # add files to menu
+
+
 		## Each MenuBar ############  
 		
-		# Open #
+		# File #
 		fileMenu 			= defineMenu( '&File')
 		bar_file_open 		= append(fileMenu, 	self.onOpen, 	"&Open", "Open the Image File and Directory", id = wx.ID_OPEN)
+		bar_recent_files 		= subMenu(fileMenu, "&Recent Files", bar_recent_files)
 		bar_thumbnail_ctrl 	= append(fileMenu, 	self.onSwitchThumb, "&Thumbnail Ctrl\tCtrl+T", "Open the Thumbnail Controller")
 		bar_exit			= append(fileMenu, 	self.onExit, 	"E&xit", "Close the Window", id = wx.ID_EXIT)
 		
@@ -114,12 +127,16 @@ class ViewerMenuBar():
 
 	def showMenuBar(self):
 		for l in self.bind_list: self.parentClass.Bind(wx.EVT_MENU, l[0], l[1])
+		# RecentFiles Binding
+		self.parentClass.Bind(wx.EVT_MENU_RANGE, self.onRecentFiles, id=wx.ID_FILE1, id2=wx.ID_FILE9)
 
 		## Creating the menubar ##
 		self.menuBar = wx.MenuBar()
 		for m in self.defineMenues : self.menuBar.Append(m[0], "%s  " %(m[1]))
 		self.parentClass.SetMenuBar(self.menuBar)
 		self.parentClass.Bind(wx.EVT_CHAR_HOOK, self.onKeyUP)
+
+
 
 	def switch(self, value):
 		self._switch = value 
@@ -235,6 +252,11 @@ class ViewerMenuBar():
 	def onSwitchThumb(self, event):
 		dir = self.Panel._get_CurrentDir()
 		self.parentClass.switchToThumbnailCtrl(dir)
+
+	def onRecentFiles(self, event): 
+		file_num = event.GetId() - wx.ID_FILE1
+		file_path = self.filehistory.GetHistoryFile(file_num)
+		self.openFile(file_path)
 
 	# <MenuBar Function/> ----------------------------------------------------------------------
 

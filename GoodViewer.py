@@ -95,7 +95,6 @@ class myApp(wx.PySimpleApp):
 	def activeThumbnailCtrl(self, dir=None):
 		try: self.ThumbnailCtrlFrame.show(dir)
 		except AttributeError:
-			print 'new'
 			self.ThumbnailCtrlFrame = ThumbnailCtrlFrame(self, self.ImageCtrl)
 			self.ThumbnailCtrlFrame.show(dir)
 
