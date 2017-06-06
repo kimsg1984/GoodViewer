@@ -341,3 +341,4 @@ class ImageCtrl():
 	def saveHistory(self, filepath):
 		self.filehistory.AddFileToHistory(filepath)
 		self.filehistory.Save(self.history_config)
+		self.history_config.Flush()

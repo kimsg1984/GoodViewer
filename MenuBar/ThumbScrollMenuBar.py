@@ -6,6 +6,7 @@
 # irc.freenode #ubuntu-ko Sungyo
 
 import sys
+import urllib2
 import wx
 
 reload(sys)
@@ -21,14 +22,21 @@ class ThumbScrollMenuBar():
 	def __init__(self, parent, panel):
 		self.Parent = parent
 		self.Panel = panel
-		self.setMenuBar()
-
+		
 		self.__setClassValues()
+		self.__setFileHistory()
+		self.setMenuBar()
 		self.__loadConfig()
 
 	def __setClassValues(self):
 		self.class_value = ""
 		pass
+
+	def __setFileHistory(self):
+		self.filehistory = wx.FileHistory(5)
+		self.history_config = wx.Config("Good Viewer", style=wx.CONFIG_USE_LOCAL_FILE)
+		self.filehistory.Load(self.history_config)
+		self.history_config.Flush()
 
 	def  setMenuBar(self):
 
@@ -36,6 +44,7 @@ class ThumbScrollMenuBar():
 			menu = wx.Menu()
 			self.defineMenues.append((menu, element_name))
 			return menu
+
 
 		self.defineMenues = []
 		self.bind_list = []
@@ -48,13 +57,13 @@ class ThumbScrollMenuBar():
 
 			if item: 	result = menu.Append(id, element_name, comment, item)
 			else: 		result = menu.Append(id, element_name, comment)
-			self.bind_list.append((bind_function, result))
+			if bind_function:	self.bind_list.append((bind_function, result))
 			return result
 
-		def subMenu(main_menu, element_name):
-			sub_menu = wx.Menu()
-			main_menu.AppendMenu(wx.NewId(), element_name, sub_menu)
-			return sub_menu
+		def subMenu(main_menu, element_name, sub_menu = None):
+			if not sub_menu: sub_menu = wx.Menu()
+       			main_menu.AppendMenu(wx.NewId(), element_name, sub_menu)
+       			return sub_menu 
 
 		comment = {
 			'menubar_name' 	: "comment"
@@ -62,9 +71,15 @@ class ThumbScrollMenuBar():
 
 		## Each MenuBar ############  
 
+		# set filehistory
+		bar_recent_files = wx.Menu()
+		self.filehistory.UseMenu(bar_recent_files)
+		self.filehistory.AddFilesToMenu() # add files to menu
+
 		# File #
 		fileMenu 			= defineMenu( '&File')
 		bar_file_open 		= append(fileMenu, 	self.onOpen, 	"&Open", "Open the Image File and Directory", id = wx.ID_OPEN)
+		bar_recent_files 		= subMenu(fileMenu, "&Recent Files", bar_recent_files)
 		bar_exit			= append(fileMenu, 	self.onExit, 		"E&xit", "Close the Window", id = wx.ID_EXIT)
 
 		# Edit #
@@ -77,11 +92,14 @@ class ThumbScrollMenuBar():
 
 	def showMenuBar(self):
 		for l in self.bind_list: self.Parent.Bind(wx.EVT_MENU, l[0], l[1])
+		# RecentFiles Binding
+		self.Parent.Bind(wx.EVT_MENU_RANGE, self.onRecentFiles, id=wx.ID_FILE1, id2=wx.ID_FILE9)
 
 		## Creating the menubar ##
 		self.menuBar = wx.MenuBar()
 		for m in self.defineMenues : self.menuBar.Append(m[0], "%s  " %(m[1]))
 		self.Parent.SetMenuBar(self.menuBar)
+
 		self._setEventBind()
 
 	def closeMenuBar(self):
@@ -124,6 +142,16 @@ class ThumbScrollMenuBar():
 
 	def onMove(self, event):
 		pass
+
+	def openFile(self, filename):
+		filename = urllib2.unquote(filename).decode('utf8')
+		self.Parent.switchToViewer(filename)
+		# self.Panel.onUpdateImages(filename)
+
+	def onRecentFiles(self, event): 
+		file_num = event.GetId() - wx.ID_FILE1
+		file_path = self.filehistory.GetHistoryFile(file_num)
+		self.openFile(file_path)
 
 	# # <MenuBar/> ----------------------------------------------------------------------
 
