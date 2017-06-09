@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"is",
+				"isdir	function"
+			],
+			[
+				"e",
+				"exists	function"
+			],
+			[
+				"ex",
+				"expanduser	function"
+			],
+			[
+				"T",
+				"Temporary"
+			],
+			[
+				"P",
+				"Parent	statement"
+			],
+			[
 				"onRe",
 				"onRecentFiles"
 			],
@@ -26,10 +46,6 @@
 			[
 				"Get",
 				"GetBitmap	function"
-			],
-			[
-				"is",
-				"isfile	function"
 			],
 			[
 				"opt",
@@ -146,10 +162,6 @@
 			[
 				"no",
 				"nodeManager	class"
-			],
-			[
-				"ex",
-				"exclude	statement"
 			],
 			[
 				"cu",
@@ -502,18 +514,6 @@
 			[
 				"las",
 				"last_verse"
-			],
-			[
-				"last_ver",
-				"last_verse"
-			],
-			[
-				"la",
-				"last_chapter"
-			],
-			[
-				"r",
-				"robinson"
 			]
 		]
 	},
@@ -528,10 +528,42 @@
 			}
 		},
 		{
+			"file": "MenuBar/ThumbScrollMenuBar.py",
+			"settings":
+			{
+				"buffer_size": 4977,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "View/ThumbScrollPanel.py",
+			"settings":
+			{
+				"buffer_size": 10147,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "View/ViewerPanel.py",
 			"settings":
 			{
-				"buffer_size": 11123,
+				"buffer_size": 11883,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/opt/binarybox/module/python/OS.py",
+			"settings":
+			{
+				"buffer_size": 2806,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
+			"settings":
+			{
+				"buffer_size": 816,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +571,7 @@
 			"file": "imageCtrl.py",
 			"settings":
 			{
-				"buffer_size": 9224,
+				"buffer_size": 9260,
 				"line_ending": "Unix"
 			}
 		},
@@ -548,14 +580,6 @@
 			"settings":
 			{
 				"buffer_size": 9998,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/sungyo/test.py",
-			"settings":
-			{
-				"buffer_size": 1476,
 				"line_ending": "Unix"
 			}
 		}
@@ -624,6 +648,8 @@
 	},
 	"file_history":
 	[
+		"/opt/binarybox/module/o",
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/Default.sublime-keymap",
 		"/home/sungyo/test.py",
 		"/home/sungyo/Unison/Application/GoodViewer/BO/thumbnailctrl.py",
 		"/opt/binarybox/module/python/IO.py",
@@ -746,12 +772,10 @@
 		"/home/sungyo/바탕화면/logcheck",
 		"/home/sungyo/Unison/script/module/python/IO.py",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/LogTail.py",
-		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/Default.sublime-keymap",
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/userimport.sublime-snippet",
 		"/backup/sungyo/Unison-real/script/module/python/BinaryManager/WhereIs.py",
 		"/home/sungyo/다운로드/vimrc",
-		"/home/sungyo/Unison/script/module/python/BinaryManager/Core.py",
-		"/home/sungyo/Unison/script/module/python/BinaryManager/_Core.pyc"
+		"/home/sungyo/Unison/script/module/python/BinaryManager/Core.py"
 	],
 	"find":
 	{
@@ -759,7 +783,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 135.0,
 		"where_history":
 		[
 			""
@@ -770,6 +794,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Copy to Temporary",
+			"onOpen Webpage",
+			"onOpen Folder",
+			"OpenWebpage",
+			"OpenFolder",
+			"saveHistory",
+			"setfile",
 			"onUpdateImages",
 			"open",
 			"bind_list",
@@ -890,14 +921,7 @@
 			"pic_dir",
 			"pre v",
 			"pre",
-			"folder_flip",
-			"ImageCtrl",
-			"folder_flip",
-			"imageCtrl",
-			"folder_flip",
-			"imageCtrl",
-			"def next",
-			"def nextPicture"
+			"folder_flip"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -905,6 +929,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Open Webpage",
+			"Open Folder",
 			"onRightClickMenuSelection",
 			"self.menu_title_by_id",
 			"orRightClickMenuSelection",
@@ -1030,9 +1056,7 @@
 			"string.",
 			"",
 			"\nstring.",
-			"string.\n",
-			"",
-			"\n"
+			"string.\n"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1075,18 +1099,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "View/ViewerPanel.py",
+					"file": "MenuBar/ThumbScrollMenuBar.py",
 					"settings":
 					{
-						"buffer_size": 11123,
+						"buffer_size": 4977,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2110,
-								2110
+								835,
+								835
 							]
 						],
 						"settings":
@@ -1095,25 +1119,53 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2409.0,
+						"translation.y": 627.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "imageCtrl.py",
+					"file": "View/ThumbScrollPanel.py",
 					"settings":
 					{
-						"buffer_size": 9224,
+						"buffer_size": 10147,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1242,
-								1242
+								4701,
+								4701
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 329.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "View/ViewerPanel.py",
+					"settings":
+					{
+						"buffer_size": 11883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3197,
+								3197
 							]
 						],
 						"settings":
@@ -1122,13 +1174,95 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1222.0,
+						"translation.y": 3525.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
+					"file": "/opt/binarybox/module/python/OS.py",
+					"settings":
+					{
+						"buffer_size": 2806,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1986,
+								1986
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2475.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
+					"settings":
+					{
+						"buffer_size": 816,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2,
+								2
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "imageCtrl.py",
+					"settings":
+					{
+						"buffer_size": 9260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3392,
+								3392
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3828.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "MenuBar/ViewerMenuBar.py",
 					"settings":
 					{
@@ -1139,8 +1273,8 @@
 						"selection":
 						[
 							[
-								8790,
-								8790
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1149,35 +1283,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8117.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/home/sungyo/test.py",
-					"settings":
-					{
-						"buffer_size": 1476,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1357,
-								1357
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 759.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

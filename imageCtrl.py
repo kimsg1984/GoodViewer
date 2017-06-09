@@ -130,7 +130,7 @@ class ImageCtrl():
 		filename 	= self.pic_files[number]
 		self.current_filename = filename
 		
-		# print filename
+		self.saveHistory(os.path.join(self.pic_dir, filename))
 		if not self.current_img : self.current_img = self.gettingImgForPanel(filename)
 
 		# self.imageOnPanel(self.current_img)
@@ -143,7 +143,6 @@ class ImageCtrl():
 		image_path = os.path.join(dir, filename)
 		if wx.Image.CanRead(filename=image_path):
 			img = wx.Image(name=image_path)
-			self.saveHistory(image_path)
 		else:
 			img = wx.EmptyImage(200, 200)
 		return img

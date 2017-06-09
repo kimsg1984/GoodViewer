@@ -36,7 +36,7 @@ class ThumbScrollMenuBar():
 		self.filehistory = wx.FileHistory(5)
 		self.history_config = wx.Config("Good Viewer", style=wx.CONFIG_USE_LOCAL_FILE)
 		self.filehistory.Load(self.history_config)
-		self.history_config.Flush()
+		
 
 	def  setMenuBar(self):
 

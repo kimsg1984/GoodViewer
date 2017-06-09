@@ -14,6 +14,7 @@ import os
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
+temporary_folder = os.path.expanduser('~/Temporary')
 
 ## 커스텀 모듈 ##
 pymodule_path='/home/sungyo/Unison/script/module/python'
@@ -24,9 +25,10 @@ Config = IO.Shelve(filename='./Data/gooviewer_config.dat')
 File = IO.File()
 Log	= IO.Log(log_name='ViewerPanel', filelogging=False)
 
+import OS
+FileManager = OS.FileManager()
 
 import View.Configure
-
 import Data.WildCard
 wildcard = Data.WildCard.getKeywords()
 wildcard_on_listdir = wildcard[1]
@@ -109,8 +111,9 @@ class ViewerPanel(wx.ScrolledWindow):
 	def __setRightCickPopup(self):
 		# RightCickPopup 
 		menu_titles = [ 
-			"OpenFolder",
-			"OpenWebpage",
+			"Open Folder",
+			"Open Webpage",
+			"Copy to Temporary",
 			]
 
 		self.menu_title_by_id = {}
@@ -362,8 +365,10 @@ class ViewerPanel(wx.ScrolledWindow):
 	## PopUp Menu Mathods #############
 	def onRightClickMenuSelection(self, check):
 		operation = self.menu_title_by_id[ check.GetId() ]
-		if operation == 'OpenFolder': self.onOpenFolder()
-		if operation == 'OpenWebpage': self.onOpenWebpage()
+		print(operation)
+		if operation == 'Open Folder': self.onOpenFolder()
+		elif operation == 'Open Webpage': self.onOpenWebpage()
+		elif operation == 'Copy to Temporary': self.onCopyToTemporary()
 
 	def onOpenFolder(self):
 		subprocess.check_call(['nautilus', self.ImageCtrl.pic_dir])
@@ -380,3 +385,19 @@ class ViewerPanel(wx.ScrolledWindow):
 				if len(find_text) > 0:
 					address = (File.read(os.path.join(pic_dir, find_text[0])).split('\n'))[0] 
 					subprocess.check_call(['chromium-browser', address])
+
+	def onCopyToTemporary(self):
+		print('copy')
+		pic_dir = self.ImageCtrl.pic_dir
+		current_filename = self.ImageCtrl.current_filename
+		pic_file =  os.path.join( self.ImageCtrl.pic_dir, self.ImageCtrl.current_filename)
+		dest_file = os.path.join(temporary_folder, current_filename)
+
+		if not os.path.exists(temporary_folder):
+			os.mkdir(temporary_folder)
+			if not os.path.isdir(temporary_folder): 
+				return False
+				Log.Logger.error('Temporary folder를 생성하지 못하였습니다.')
+		
+		if not os.path.exists(dest_file): 
+			FileManager.cp(pic_file, dest_file)
