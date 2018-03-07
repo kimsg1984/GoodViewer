@@ -152,7 +152,7 @@ class ViewerMenuBar():
 	## <MenuBar Function> ----------------------------------------------------------------------
 
 	def openFile(self, filename):
-		filename = urllib2.unquote(filename).decode('utf8')
+		# filename = urllib2.unquote(filename).decode('utf8')
 		self.Panel.onUpdateImages(filename)
 
 	def onOpen(self, event):

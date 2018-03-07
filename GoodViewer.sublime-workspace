@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"on",
+				"onDeleteImage	function"
+			],
+			[
 				"is",
 				"isdir	function"
 			],
@@ -510,10 +514,6 @@
 			[
 				"par",
 				"parsing_code"
-			],
-			[
-				"las",
-				"last_verse"
 			]
 		]
 	},
@@ -528,10 +528,13 @@
 			}
 		},
 		{
+			"contents": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\n# Author: SunGyo Kim\n# Email: Kimsg1984@gmail.com\n# irc.freenode #ubuntu-ko Sungyo\n\nimport sys\nimport urllib2\nimport wx\n\nreload(sys)\nsys.setdefaultencoding('utf-8')\n\npymodule_path='/home/sungyo/Unison/script/module/python'\nsys.path.append(pymodule_path)\n\nimport IO\nConfig = IO.Shelve(filename='./Data/gooviewer_config.dat')\n\nclass ThumbScrollMenuBar():\n	def __init__(self, parent, panel):\n		self.Parent = parent\n		self.Panel = panel\n		\n		self.__setClassValues()\n		self.__setFileHistory()\n		self.setMenuBar()\n		self.__loadConfig()\n\n	def __setClassValues(self):\n		self.class_value = \"\"\n		pass\n\n	def __setFileHistory(self):\n		self.filehistory = wx.FileHistory(5)\n		self.history_config = wx.Config(\"Good Viewer\", style=wx.CONFIG_USE_LOCAL_FILE)\n		self.filehistory.Load(self.history_config)\n		\n	def  setMenuBar(self):\n\n		def defineMenu(element_name):\n			menu = wx.Menu()\n			self.defineMenues.append((menu, element_name))\n			return menu\n\n		self.defineMenues = []\n		self.bind_list = []\n\n		## Setting up the menu ##\n\n		def append(menu, bind_function, element_name, comment,  id = wx.ID_ANY, item = None):\n			# 추가할 메뉴, 바인드함수, 라벨이름, 설명, (아이디와 아이템)\n			# '라벨이름에 해당되는 'element_name'은 중복되서는 안된다.'\n\n			if item: 	result = menu.Append(id, element_name, comment, item)\n			else: 		result = menu.Append(id, element_name, comment)\n			if bind_function:	self.bind_list.append((bind_function, result))\n			return result\n\n		def subMenu(main_menu, element_name, sub_menu = None):\n			if not sub_menu: sub_menu = wx.Menu()\n       			main_menu.AppendMenu(wx.NewId(), element_name, sub_menu)\n       			return sub_menu \n\n		comment = {\n			'menubar_name' 	: \"comment\"\n		} # for long comment..\n\n		## Each MenuBar ############  \n\n		# set filehistory\n		bar_recent_files = wx.Menu()\n		self.filehistory.UseMenu(bar_recent_files)\n		self.filehistory.AddFilesToMenu() # add files to menu\n\n		# File #\n		fileMenu 			= defineMenu( '&File')\n		bar_file_open 		= append(fileMenu, 	self.onOpen, 	\"&Open\", \"Open the Image File and Directory\", id = wx.ID_OPEN)\n		bar_recent_files 		= subMenu(fileMenu, \"&Recent Files\", bar_recent_files)\n		bar_exit			= append(fileMenu, 	self.onExit, 		\"E&xit\", \"Close the Window\", id = wx.ID_EXIT)\n\n		# Edit #\n		editMenu			= defineMenu('&Edit')\n		bar_delete			= append(editMenu, 	self.onDelete, 	\"&Delete File \\tDelete\", \"Going Trash\", id = wx.ID_DELETE)\n		bar_undo 			= append(editMenu, 	self.onUndo, 	\"&Undo\\tCtrl+Z\", \"Restore the Deleted Picture\", id = wx.ID_UNDO)\n\n		# Help #\n		helpMenu  			= defineMenu( '&Help' )\n\n	def showMenuBar(self):\n		for l in self.bind_list: self.Parent.Bind(wx.EVT_MENU, l[0], l[1])\n		# RecentFiles Binding\n		self.Parent.Bind(wx.EVT_MENU_RANGE, self.onRecentFiles, id=wx.ID_FILE1, id2=wx.ID_FILE9)\n\n		## Creating the menubar ##\n		self.menuBar = wx.MenuBar()\n		for m in self.defineMenues : self.menuBar.Append(m[0], \"%s  \" %(m[1]))\n		self.Parent.SetMenuBar(self.menuBar)\n\n		self._setEventBind()\n\n	def closeMenuBar(self):\n		self.Parent.Unbind(wx.EVT_MENU)\n		self.Parent.Unbind(wx.EVT_CHAR_HOOK)\n\n\n	def _setEventBind(self):\n		self.Parent.Bind(wx.EVT_CHAR_HOOK, self.onKeyUP)\n\n	def __loadConfig(self):\n		# if Config.load('sub_high_quelity'): self.bar_high_quelity.Check()\n		pass\n\n	## <MenuBar> ----------------------------------------------------------------------\n\n	def onOpen(self, event):\n		if self.Panel._get_onUpdating is True: return\n		self.Panel.onDirectory()\n\n	def onExit(self, event):\n		if self.Panel._get_onUpdating is True: return\n		Config.save('thumb_panel_size', self.Parent.GetSize())\n		Config.save('thumb_panel_position', self.Parent.GetScreenPosition())\n		self.Parent.Close(True)\n		sys.exit()\n\n	def onDelete(self, event):\n		if self.Panel._get_onUpdating is True: return\n		print 'delete'\n		self.Panel.onDelete()\n\n	def onUndo(self, event):\n		if self.Panel._get_onUpdating is True: return\n		self.Panel.onUndo()\n\n	def onResize(self, event):\n		if self.Panel._get_onUpdating is True: return\n		print self.Parent.GetSize()\n\n	def onMove(self, event):\n		pass\n\n	def openFile(self, filename):\n		filename = urllib2.unquote(filename).decode('utf8')\n		self.Parent.switchToViewer(filename)\n		# self.Panel.onUpdateImages(filename)\n\n	def onRecentFiles(self, event): \n		file_num = event.GetId() - wx.ID_FILE1\n		file_path = self.filehistory.GetHistoryFile(file_num)\n		self.openFile(file_path)\n\n	# # <MenuBar/> ----------------------------------------------------------------------\n\n	def onKeyUP(self, event): # let's set the key function\n		keyCode = event.GetKeyCode()\n		if keyCode == wx.WXK_ESCAPE:    # ESC\n			self.Panel.onEscape()\n		elif keyCode == wx.WXK_RIGHT:\n			self.Panel.OnRight()\n		elif keyCode == wx.WXK_LEFT:\n			self.Panel.OnLeft()\n		elif keyCode == wx.WXK_UP: self.Panel.OnUpDown('up')\n		elif keyCode == wx.WXK_DOWN: self.Panel.OnUpDown('down')\n		elif keyCode == wx.WXK_SPACE: self.Panel.onSpaceBar()\n		elif keyCode == wx.WXK_RETURN: self.Panel.onReturn()\n		elif keyCode == wx.WXK_DELETE: self.Panel.onDelete()\n",
 			"file": "MenuBar/ThumbScrollMenuBar.py",
+			"file_size": 5059,
+			"file_write_time": 1497022637000000,
 			"settings":
 			{
-				"buffer_size": 4977,
+				"buffer_size": 4975,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,7 +550,7 @@
 			"file": "View/ViewerPanel.py",
 			"settings":
 			{
-				"buffer_size": 11883,
+				"buffer_size": 12090,
 				"line_ending": "Unix"
 			}
 		},
@@ -556,14 +559,6 @@
 			"settings":
 			{
 				"buffer_size": 2806,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
-			"settings":
-			{
-				"buffer_size": 816,
 				"line_ending": "Unix"
 			}
 		},
@@ -579,7 +574,7 @@
 			"file": "MenuBar/ViewerMenuBar.py",
 			"settings":
 			{
-				"buffer_size": 9998,
+				"buffer_size": 10000,
 				"line_ending": "Unix"
 			}
 		}
@@ -648,6 +643,9 @@
 	},
 	"file_history":
 	[
+		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
+		"/home/sungyo/바탕화면/exif2.sh",
+		"/home/sungyo/바탕화면/jackpum_gel2.py",
 		"/opt/binarybox/module/o",
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/Default.sublime-keymap",
 		"/home/sungyo/test.py",
@@ -762,7 +760,6 @@
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/SublimeREPL/SublimeREPL.sublime-settings",
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Default/Preferences.sublime-settings",
 		"/home/sungyo/test.txt",
-		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/__init__.py",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/WhereIs.py",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/_Core.py",
@@ -773,9 +770,7 @@
 		"/home/sungyo/Unison/script/module/python/IO.py",
 		"/home/sungyo/Unison/script/module/python/BinaryManager/LogTail.py",
 		"/backup/sungyo/Unison-real/script/sublime-text-2/Packages/User/userimport.sublime-snippet",
-		"/backup/sungyo/Unison-real/script/module/python/BinaryManager/WhereIs.py",
-		"/home/sungyo/다운로드/vimrc",
-		"/home/sungyo/Unison/script/module/python/BinaryManager/Core.py"
+		"/backup/sungyo/Unison-real/script/module/python/BinaryManager/WhereIs.py"
 	],
 	"find":
 	{
@@ -783,7 +778,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 135.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -794,6 +789,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"filename",
+			"worker",
+			"self.p",
+			"multi",
 			"Copy to Temporary",
 			"onOpen Webpage",
 			"onOpen Folder",
@@ -917,11 +916,7 @@
 			"path",
 			"dir_path",
 			"updateImage",
-			"updateImages",
-			"pic_dir",
-			"pre v",
-			"pre",
-			"folder_flip"
+			"updateImages"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1067,7 +1062,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1082,8 +1077,8 @@
 						"selection":
 						[
 							[
-								754,
-								754
+								1103,
+								1103
 							]
 						],
 						"settings":
@@ -1092,7 +1087,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 126.0,
+						"translation.y": 825.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1102,15 +1097,15 @@
 					"file": "MenuBar/ThumbScrollMenuBar.py",
 					"settings":
 					{
-						"buffer_size": 4977,
+						"buffer_size": 4975,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								835,
-								835
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1119,7 +1114,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 627.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1157,15 +1152,15 @@
 					"file": "View/ViewerPanel.py",
 					"settings":
 					{
-						"buffer_size": 11883,
+						"buffer_size": 12090,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3197,
-								3197
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1174,7 +1169,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3525.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1201,41 +1196,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2475.0,
+						"translation.y": 462.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "/backup/sungyo/Unison-real/script/sublime-text-2/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
-					"settings":
-					{
-						"buffer_size": 816,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2,
-								2
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "imageCtrl.py",
 					"settings":
 					{
@@ -1246,8 +1213,8 @@
 						"selection":
 						[
 							[
-								3392,
-								3392
+								3320,
+								3320
 							]
 						],
 						"settings":
@@ -1256,25 +1223,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3828.0,
+						"translation.y": 3910.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "MenuBar/ViewerMenuBar.py",
 					"settings":
 					{
-						"buffer_size": 9998,
+						"buffer_size": 10000,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3247,
+								3247
 							]
 						],
 						"settings":
@@ -1283,7 +1250,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2871.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

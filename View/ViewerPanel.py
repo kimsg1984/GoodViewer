@@ -113,6 +113,7 @@ class ViewerPanel(wx.ScrolledWindow):
 		menu_titles = [ 
 			"Open Folder",
 			"Open Webpage",
+			"Move to Temporary",
 			"Copy to Temporary",
 			]
 
@@ -369,6 +370,7 @@ class ViewerPanel(wx.ScrolledWindow):
 		if operation == 'Open Folder': self.onOpenFolder()
 		elif operation == 'Open Webpage': self.onOpenWebpage()
 		elif operation == 'Copy to Temporary': self.onCopyToTemporary()
+		elif operation == 'Move to Temporary': self.onMoveToTemporary()
 
 	def onOpenFolder(self):
 		subprocess.check_call(['nautilus', self.ImageCtrl.pic_dir])
@@ -387,7 +389,6 @@ class ViewerPanel(wx.ScrolledWindow):
 					subprocess.check_call(['chromium-browser', address])
 
 	def onCopyToTemporary(self):
-		print('copy')
 		pic_dir = self.ImageCtrl.pic_dir
 		current_filename = self.ImageCtrl.current_filename
 		pic_file =  os.path.join( self.ImageCtrl.pic_dir, self.ImageCtrl.current_filename)
@@ -401,3 +402,9 @@ class ViewerPanel(wx.ScrolledWindow):
 		
 		if not os.path.exists(dest_file): 
 			FileManager.cp(pic_file, dest_file)
+		if os.path.exists(dest_file):
+			return True
+
+	def onMoveToTemporary(self):
+		if self.onCopyToTemporary():
+			self.onDeleteImage()
